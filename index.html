@@ -368,6 +368,11 @@
         <label class="uploadchip" for="stUpload">⬆ Use your own photo</label>
         <input type="file" id="stUpload" accept="image/*" hidden>
         <p style="font-size:.72rem;color:var(--muted);margin:.35rem 0 0">Your photo never leaves your device — it's only used to draw the graphic.</p>
+        <div id="stImgCtl" hidden>
+          <p class="mini-l">Position the photo</p>
+          <input type="range" id="stZoom" min="100" max="250" value="100" style="width:100%;accent-color:var(--green)" aria-label="Zoom the photo">
+          <p style="font-size:.72rem;color:var(--muted);margin:.2rem 0 0">Drag the preview to move the photo · slide to zoom.</p>
+        </div>
         <p class="mini-l">Call to action</p>
         <div class="filter-row" id="stCta"></div>
         <label class="stcheck"><input type="checkbox" id="stLogo" checked> Show the event logo</label>
@@ -869,7 +874,7 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
       {id:"ph3", label:"Photo · boardwalk",kind:"photo", src:"assets/photos/participants-walking-boardwalk.jpg"},
       {id:"ph4", label:"Photo · cane close-up", kind:"photo", src:"assets/photos/white-cane-closeup-sneaker-keychain.jpg"}
     ];
-    var st = { format:"square", head:VOICES[0].def, bg:"navy", cta:CTAS[0], logo:true, custom:"", voice:VOICES[0].id };
+    var st = { format:"square", head:VOICES[0].def, bg:"navy", cta:CTAS[0], logo:true, custom:"", voice:VOICES[0].id, imgScale:1, imgX:0, imgY:0 };
     var canvas = $("#stCanvas");
     if (!canvas) return;
     var ctx = canvas.getContext("2d");
@@ -940,6 +945,38 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
     function fmt(){ return FORMATS.filter(function(f){ return f.id === st.format; })[0]; }
     function bg(){ return BGS.filter(function(b){ return b.id === st.bg; })[0]; }
 
+    // pan & zoom for photo backgrounds
+    $("#stZoom").addEventListener("input", function (e) {
+      st.imgScale = (+e.target.value) / 100; draw();
+    });
+    (function () {
+      var dragging = false, sx = 0, sy = 0, startX = 0, startY = 0;
+      function metrics() {
+        var b = bg(), f = fmt();
+        if (b.kind !== "photo" || !b._img) return null;
+        var im = b._img, sc = Math.max(f.w/im.width, f.h/im.height) * st.imgScale;
+        return { maxX: Math.max(0,(im.width*sc - f.w)/2), maxY: Math.max(0,(im.height*sc - f.h)/2) };
+      }
+      canvas.addEventListener("pointerdown", function (e) {
+        if (!metrics()) return;
+        dragging = true; sx = e.clientX; sy = e.clientY; startX = st.imgX; startY = st.imgY;
+        canvas.setPointerCapture(e.pointerId);
+        canvas.style.cursor = "grabbing";
+        e.preventDefault();
+      });
+      canvas.addEventListener("pointermove", function (e) {
+        if (!dragging) return;
+        var m = metrics(); if (!m) return;
+        var k = canvas.width / canvas.clientWidth;
+        if (m.maxX > 0) st.imgX = Math.max(-1, Math.min(1, startX + (e.clientX - sx) * k / m.maxX));
+        if (m.maxY > 0) st.imgY = Math.max(-1, Math.min(1, startY + (e.clientY - sy) * k / m.maxY));
+        draw();
+      });
+      function up() { dragging = false; canvas.style.cursor = bg().kind === "photo" ? "grab" : "default"; }
+      canvas.addEventListener("pointerup", up);
+      canvas.addEventListener("pointercancel", up);
+    })();
+
     function wrap(text, font, maxW) {
       ctx.font = font;
       var words = text.split(" "), lines = [], line = "";
@@ -952,8 +989,16 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
       return lines;
     }
 
+    var lastBg = null;
     function draw() {
       var f = fmt(), b = bg();
+      if (lastBg !== st.bg) {
+        lastBg = st.bg;
+        st.imgX = 0; st.imgY = 0; st.imgScale = 1;
+        var z = $("#stZoom"); if (z) z.value = 100;
+      }
+      var ctl = $("#stImgCtl"); if (ctl) ctl.hidden = b.kind !== "photo";
+      canvas.style.cursor = b.kind === "photo" ? "grab" : "default";
       canvas.width = f.w; canvas.height = f.h;
       var W = f.w, H = f.h;
       var green = "#78BE21", navy = "#002855", gold = "#FFCF00";
@@ -968,9 +1013,12 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
           g.addColorStop(0,"#001852"); g.addColorStop(.55,"#003087"); g.addColorStop(1,"#001033");
           ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
         } else if (b.kind === "photo" && b._img) {
-          var im = b._img, s = Math.max(W/im.width, H/im.height);
+          var im = b._img, s = Math.max(W/im.width, H/im.height) * st.imgScale;
           var dw = im.width*s, dh = im.height*s;
-          ctx.drawImage(im, (W-dw)/2, (H-dh)/2, dw, dh);
+          var maxX = Math.max(0, (dw - W) / 2), maxY = Math.max(0, (dh - H) / 2);
+          var ox = Math.max(-maxX, Math.min(maxX, st.imgX * maxX));
+          var oy = Math.max(-maxY, Math.min(maxY, st.imgY * maxY));
+          ctx.drawImage(im, (W-dw)/2 + ox, (H-dh)/2 + oy, dw, dh);
           ctx.fillStyle = "rgba(0,24,82,.42)"; ctx.fillRect(0,0,W,H);
           var g2 = ctx.createLinearGradient(0,H,0,0);
           g2.addColorStop(0,"rgba(0,16,51,.78)"); g2.addColorStop(.6,"rgba(0,16,51,.15)"); g2.addColorStop(1,"rgba(0,16,51,0)");
@@ -1171,6 +1219,10 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
        body:"My white cane stands for mobility, confidence and self-direction. I walk in the White Cane Day Walk to raise awareness and help the next person navigating vision loss connect to support. Walk with me on Saturday, Oct. 17 at the Dallas Zoo."}
     ];
 
+    var LOGO_URL = new URL("assets/logos/white-cane-day-walk-logo.png", location.href).href;
+    var EB_LOGO = new Image();
+    EB_LOGO.src = "assets/logos/white-cane-day-walk-logo.png";
+
     var eb = { voice:"anyone", purpose:EMAILS[0].purpose, org:"", link:"", name:"" };
     var voiceEl = document.getElementById("ebVoice"), purposeEl = document.getElementById("ebPurpose");
 
@@ -1237,9 +1289,11 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         '<div style="max-width:600px;margin:0 auto;padding:24px 16px">' +
         '<div style="height:6px;background:#003087;border-radius:3px 3px 0 0;overflow:hidden"><div style="width:22%;height:6px;background:#78BE21"></div></div>' +
         '<div style="background:#002855;color:#ffffff;padding:28px 28px 24px">' +
+        '<img src="' + LOGO_URL + '" alt="Walk for Independence — White Cane Day Walk logo" width="140" style="float:right;width:140px;height:auto;background:#ffffff;padding:10px;border-radius:10px;margin:0 0 12px 16px">' +
         '<div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#78BE21;margin-bottom:8px">White Cane Day Walk</div>' +
         '<div style="font-size:26px;font-weight:800;line-height:1.15">' + esc(fill(e.subject)) + '</div>' +
         '<div style="font-size:13px;color:#c7d3e6;margin-top:10px">Saturday, Oct. 17 · 5–7 PM · Dallas Zoo</div>' +
+        '<div style="clear:both"></div>' +
         '</div>' +
         '<div style="background:#ffffff;padding:28px">' + paras +
         '<div style="margin:24px 0 8px"><a href="' + esc(link()) + '" style="display:inline-block;background:#78BE21;color:#002855;font-size:15px;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:8px">' + esc(fill(e.cta)) + '</a></div>' +
@@ -1273,13 +1327,24 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         x.fillStyle = "#78BE21"; x.fillRect(0, 0, 264, 8);
         x.fillStyle = "#003087"; x.fillRect(264, 0, 936, 8);
         x.textBaseline = "alphabetic";
+        var textW = 1072;
+        if (EB_LOGO.complete && EB_LOGO.naturalWidth) {
+          var chipW = 230, lw = chipW - 28, lhh = Math.round(EB_LOGO.naturalHeight * lw / EB_LOGO.naturalWidth);
+          var chipH = lhh + 28, cxp = 1200 - 64 - chipW, cyp = 44, cr = 14;
+          x.fillStyle = "#ffffff";
+          x.beginPath();
+          x.moveTo(cxp+cr,cyp); x.arcTo(cxp+chipW,cyp,cxp+chipW,cyp+chipH,cr); x.arcTo(cxp+chipW,cyp+chipH,cxp,cyp+chipH,cr);
+          x.arcTo(cxp,cyp+chipH,cxp,cyp,cr); x.arcTo(cxp,cyp,cxp+chipW,cyp,cr); x.closePath(); x.fill();
+          x.drawImage(EB_LOGO, cxp+14, cyp+14, lw, lhh);
+          textW = 1072 - chipW - 32;
+        }
         x.fillStyle = "#78BE21"; x.font = "700 22px Montserrat, Arial, sans-serif";
         var ey = "WHITE CANE DAY WALK", cx = 64;
         for (var i = 0; i < ey.length; i++) { x.fillText(ey[i], cx, 84); cx += x.measureText(ey[i]).width + 6; }
         var size = 64, lines, font;
         do {
           font = "800 " + size + "px Montserrat, Arial, sans-serif";
-          lines = wrapH(fill(e.subject), font, 1072);
+          lines = wrapH(fill(e.subject), font, textW);
           size -= 4;
         } while (lines.length * size * 1.15 > 170 && size > 30);
         size += 4;

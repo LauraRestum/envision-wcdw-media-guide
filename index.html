@@ -144,6 +144,23 @@
   html[data-theme="dark"] .act{color:#7fb1ff}
   @media (prefers-color-scheme: dark){ html[data-theme="auto"] .act{color:#7fb1ff} }
 
+  /* mini studio */
+  .gen{display:grid;grid-template-columns:400px 1fr;gap:1.6rem;align-items:start}
+  @media(max-width:920px){.gen{grid-template-columns:1fr}}
+  .gencontrols{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.4rem;box-shadow:var(--shadow)}
+  .gencontrols .mini-l{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:1rem 0 .5rem}
+  .gencontrols .mini-l:first-child{margin-top:0}
+  .gencontrols .filter-row{margin-bottom:.2rem}
+  .stcheck{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;color:var(--ink);margin:1rem 0 .2rem;cursor:pointer}
+  .stcheck input{width:16px;height:16px;accent-color:var(--green)}
+  .stacts{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+  .stnote{font-size:0.75rem;line-height:1.45;color:var(--ink);background:var(--green-soft);
+    border-left:3px solid var(--green);padding:.5rem .65rem;border-radius:5px;margin-top:1rem}
+  .genstage{position:sticky;top:4.5rem;background:linear-gradient(180deg,var(--card),var(--panel-2));
+    border:1px solid var(--line);border-radius:14px;padding:1.5rem;display:flex;justify-content:center;
+    box-shadow:inset 0 2px 16px rgba(0,40,120,.05)}
+  #stCanvas{max-width:100%;height:auto;border-radius:8px;box-shadow:var(--shadow)}
+
   /* quick rephrases */
   .langcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.2rem 1.3rem}
   .swap{display:grid;grid-template-columns:1fr auto 1.2fr;gap:1rem;align-items:baseline;
@@ -299,6 +316,7 @@
 
 <div class="tabwrap"><div class="tabs" role="tablist" aria-label="Guide sections">
   <button class="tab" role="tab" aria-selected="true" aria-controls="p-talk" id="t-talk" tabindex="0" onclick="showTab('talk')">Find your message</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-studio" id="t-studio" tabindex="-1" onclick="showTab('studio')">Mini studio</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="p-lang" id="t-lang" tabindex="-1" onclick="showTab('lang')">Language &amp; brand</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="p-assets" id="t-assets" tabindex="-1" onclick="showTab('assets')">Asset library</button>
 </div></div>
@@ -320,6 +338,34 @@
     <div class="empty" id="msgEmpty" hidden>
       <h3>No approved copy matches that combination</h3>
       <p>Try “Anyone” or “Show me everything” — or reach Envision through <a href="https://envisiondallas.org" target="_blank" rel="noopener">envisiondallas.org</a> for custom copy.</p>
+    </div>
+  </section>
+
+  <!-- ================= Mini studio ================= -->
+  <section class="panel" id="p-studio" role="tabpanel" aria-labelledby="t-studio" tabindex="0" hidden>
+    <span class="eyebrow">Mini studio</span>
+    <h2 class="sec-title">Build your own graphic</h2>
+    <p class="sec-sub">Make an on-brand social post, email header, or cover image in seconds — approved headlines, brand colors, event photos, one call to action. Download the PNG and post it, or copy the matching caption to go with it.</p>
+    <div class="gen">
+      <div class="gencontrols">
+        <p class="mini-l">Format</p>
+        <div class="filter-row" id="stFormat"></div>
+        <p class="mini-l">Headline (approved)</p>
+        <div class="filter-row" id="stHead"></div>
+        <p class="mini-l">Background</p>
+        <div class="filter-row" id="stBg"></div>
+        <p class="mini-l">Call to action</p>
+        <div class="filter-row" id="stCta"></div>
+        <label class="stcheck"><input type="checkbox" id="stLogo" checked> Show the event logo</label>
+        <div class="stacts">
+          <button class="btn btn-green" id="stDownload" type="button">Download PNG</button>
+          <button class="btn btn-ghost" id="stCaption" type="button">Copy matching caption</button>
+        </div>
+        <p class="stnote">Everything here is preapproved — headlines and captions come from the 2026 Messaging Guide, colors and type from the brand palette. One call to action per asset.</p>
+      </div>
+      <div class="genstage">
+        <canvas id="stCanvas" role="img" aria-label="Preview of your graphic"></canvas>
+      </div>
     </div>
   </section>
 
@@ -421,7 +467,7 @@
   mq.addEventListener('change',sync);})();
 
 /* tabs */
-var TAB_IDS=['talk','lang','assets'];
+var TAB_IDS=['talk','studio','lang','assets'];
 function showTab(id){
   TAB_IDS.forEach(function(t){
     var tab=document.getElementById('t-'+t),panel=document.getElementById('p-'+t);
@@ -641,6 +687,214 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
     paint();
   })();
 
+  /* ---------- Mini studio ---------- */
+  (function () {
+    var FORMATS = [
+      {id:"square", label:"Social post · 1080×1080", w:1080, h:1080},
+      {id:"cover",  label:"Social cover · 1200×630", w:1200, h:630},
+      {id:"banner", label:"Email header · 1200×300", w:1200, h:300}
+    ];
+    var HEADLINES = [
+      "Walk with us for independence.",
+      "Who do you walk for?",
+      "Start your team.",
+      "Every step counts.",
+      "Walk for someone you love.",
+      "North Texas walks for independence.",
+      "Vision can change. Independence does not have to.",
+      "Go the extra mile for independence."
+    ];
+    var CTAS = ["Register today.", "Start a team.", "Make a gift.", "Save your spot.", "None"];
+    var BGS = [
+      {id:"navy",     label:"Navy",        kind:"color", color:"#002855"},
+      {id:"blue",     label:"Blue",        kind:"color", color:"#003087"},
+      {id:"gradient", label:"Navy → blue", kind:"gradient"},
+      {id:"green",    label:"Green",       kind:"color", color:"#78BE21"},
+      {id:"ph1", label:"Photo · crowd",    kind:"photo", src:"assets/photos/crowd-behind-independence-banner.jpg"},
+      {id:"ph2", label:"Photo · the walk", kind:"photo", src:"assets/photos/walk-participant-white-cane-tree-path.jpg"},
+      {id:"ph3", label:"Photo · boardwalk",kind:"photo", src:"assets/photos/participants-walking-boardwalk.jpg"},
+      {id:"ph4", label:"Photo · cane close-up", kind:"photo", src:"assets/photos/white-cane-closeup-sneaker-keychain.jpg"}
+    ];
+    var CAPTION_BODY = "Walk with us for independence. Join Envision at the Dallas Zoo for the White Cane Day Walk, an evening of community, awareness and action supporting people who are blind or have low vision across North Texas.";
+
+    var st = { format:"square", head:HEADLINES[0], bg:"navy", cta:CTAS[0], logo:true };
+    var canvas = $("#stCanvas");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+
+    var IMGS = {};
+    function getImg(src, cb) {
+      if (IMGS[src]) { if (IMGS[src].complete) cb(IMGS[src]); else IMGS[src].addEventListener("load", function(){ cb(IMGS[src]); }); return; }
+      var im = new Image(); im.src = src; IMGS[src] = im;
+      im.addEventListener("load", function(){ cb(im); });
+    }
+
+    function chipRow(el, items, key, getId, getLabel) {
+      el.innerHTML = items.map(function (it) {
+        var id = getId(it);
+        return '<button class="chip" data-id="' + esc(id) + '" aria-pressed="' + (st[key] === id ? "true" : "false") + '">' + esc(getLabel(it)) + '</button>';
+      }).join("");
+      el.addEventListener("click", function (e) {
+        var b = e.target.closest(".chip"); if (!b) return;
+        st[key] = b.getAttribute("data-id");
+        Array.prototype.forEach.call(el.children, function (c) {
+          c.setAttribute("aria-pressed", c === b ? "true" : "false");
+        });
+        draw();
+      });
+    }
+    chipRow($("#stFormat"), FORMATS, "format", function(f){return f.id;}, function(f){return f.label;});
+    chipRow($("#stHead"), HEADLINES, "head", function(h){return h;}, function(h){return h;});
+    chipRow($("#stBg"), BGS, "bg", function(b){return b.id;}, function(b){return b.label;});
+    chipRow($("#stCta"), CTAS, "cta", function(c){return c;}, function(c){return c;});
+    $("#stLogo").addEventListener("change", function (e) { st.logo = e.target.checked; draw(); });
+
+    function fmt(){ return FORMATS.filter(function(f){ return f.id === st.format; })[0]; }
+    function bg(){ return BGS.filter(function(b){ return b.id === st.bg; })[0]; }
+
+    function wrap(text, font, maxW) {
+      ctx.font = font;
+      var words = text.split(" "), lines = [], line = "";
+      words.forEach(function (w) {
+        var t = line ? line + " " + w : w;
+        if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; }
+        else line = t;
+      });
+      if (line) lines.push(line);
+      return lines;
+    }
+
+    function draw() {
+      var f = fmt(), b = bg();
+      canvas.width = f.w; canvas.height = f.h;
+      var W = f.w, H = f.h;
+      var green = "#78BE21", navy = "#002855", gold = "#FFCF00";
+      var onGreen = b.kind === "color" && b.id === "green";
+      var inkMain = onGreen ? navy : "#ffffff";
+
+      function paint() {
+        // background
+        if (b.kind === "color") { ctx.fillStyle = b.color; ctx.fillRect(0,0,W,H); }
+        else if (b.kind === "gradient") {
+          var g = ctx.createLinearGradient(0,0,W,H);
+          g.addColorStop(0,"#001852"); g.addColorStop(.55,"#003087"); g.addColorStop(1,"#001033");
+          ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+        } else if (b.kind === "photo" && b._img) {
+          var im = b._img, s = Math.max(W/im.width, H/im.height);
+          var dw = im.width*s, dh = im.height*s;
+          ctx.drawImage(im, (W-dw)/2, (H-dh)/2, dw, dh);
+          ctx.fillStyle = "rgba(0,24,82,.42)"; ctx.fillRect(0,0,W,H);
+          var g2 = ctx.createLinearGradient(0,H,0,0);
+          g2.addColorStop(0,"rgba(0,16,51,.78)"); g2.addColorStop(.6,"rgba(0,16,51,.15)"); g2.addColorStop(1,"rgba(0,16,51,0)");
+          ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+        } else { ctx.fillStyle = navy; ctx.fillRect(0,0,W,H); }
+
+        // signature split bar
+        var barH = Math.round(H * (H > 700 ? .012 : .022));
+        ctx.fillStyle = green; ctx.fillRect(0,0,Math.round(W*.22),barH);
+        ctx.fillStyle = onGreen ? navy : "#003087"; ctx.fillRect(Math.round(W*.22),0,W-Math.round(W*.22),barH);
+
+        var M = Math.round(W * .07);
+        var isBanner = f.id === "banner";
+
+        // headline
+        var size = isBanner ? 54 : Math.round(W * .072);
+        var lines, font;
+        do {
+          font = "800 " + size + "px Montserrat, sans-serif";
+          lines = wrap(st.head, font, W - M*2 - (isBanner && st.cta !== "None" ? 300 : 0));
+          size -= 4;
+        } while (lines.length * size * 1.16 > H * (isBanner ? .55 : .42) && size > 22);
+        size += 4;
+        var lh = Math.round(size * 1.14);
+        var blockH = lines.length * lh;
+        var dateSize = Math.max(20, Math.round(size * .38));
+        var ctaH = st.cta !== "None" ? Math.round(size * .95) : 0;
+
+        var y;
+        if (isBanner) y = Math.round(H/2 - (blockH + dateSize*1.7)/2 + size*.9);
+        else y = Math.round(H - M - (st.cta!=="None" ? ctaH + size*.9 : size*.4) - dateSize*1.9 - blockH + size*.9);
+
+        ctx.font = font; ctx.fillStyle = inkMain; ctx.textBaseline = "alphabetic";
+        lines.forEach(function (ln, i) { ctx.fillText(ln, M, y + i*lh); });
+
+        // date line
+        ctx.font = "600 " + dateSize + "px Montserrat, sans-serif";
+        ctx.fillStyle = onGreen ? "rgba(0,40,85,.85)" : "rgba(255,255,255,.85)";
+        var dateY = y + (lines.length-1)*lh + Math.round(dateSize*1.7);
+        ctx.fillText("Saturday, Oct. 17 · 5–7 PM · Dallas Zoo", M, dateY);
+
+        // CTA pill + url
+        if (st.cta !== "None") {
+          var ctaSize = Math.max(20, Math.round(size * .42));
+          ctx.font = "700 " + ctaSize + "px Montserrat, sans-serif";
+          var label = st.cta.replace(/\.$/, "");
+          var tw = ctx.measureText(label).width;
+          var ph = Math.round(ctaSize * 2.1), pw = Math.round(tw + ctaSize * 2.2);
+          var px = M, py = isBanner ? dateY + Math.round(ph*.45) : dateY + Math.round(ph*.55);
+          if (isBanner && py + ph > H - 16) py = H - ph - 16;
+          ctx.fillStyle = onGreen ? navy : green;
+          ctx.beginPath();
+          var r = ph/2;
+          ctx.moveTo(px+r,py); ctx.arcTo(px+pw,py,px+pw,py+ph,r); ctx.arcTo(px+pw,py+ph,px,py+ph,r);
+          ctx.arcTo(px,py+ph,px,py,r); ctx.arcTo(px,py,px+pw,py,r); ctx.closePath(); ctx.fill();
+          ctx.fillStyle = onGreen ? "#ffffff" : navy;
+          ctx.textBaseline = "middle";
+          ctx.fillText(label, px + ctaSize*1.1, py + ph/2 + 1);
+          ctx.textBaseline = "alphabetic";
+          ctx.font = "600 " + Math.max(18, Math.round(ctaSize*.85)) + "px Montserrat, sans-serif";
+          ctx.fillStyle = onGreen ? "rgba(0,40,85,.85)" : "rgba(255,255,255,.85)";
+          ctx.fillText("whitecanedaywalk.com", px + pw + ctaSize, py + ph/2 + Math.round(ctaSize*.3));
+        }
+
+        // logo chip
+        if (st.logo && LOGO.complete && LOGO.naturalWidth) {
+          var chipW = Math.round(W * (isBanner ? .17 : .22));
+          var scale2 = (chipW - 24) / LOGO.naturalWidth;
+          var lw = chipW - 24, lhh = Math.round(LOGO.naturalHeight * scale2);
+          var chipH = lhh + 24;
+          var cx = W - M - chipW, cy = Math.round(barH + H * .05);
+          ctx.fillStyle = "#ffffff";
+          ctx.beginPath();
+          var cr = 14;
+          ctx.moveTo(cx+cr,cy); ctx.arcTo(cx+chipW,cy,cx+chipW,cy+chipH,cr); ctx.arcTo(cx+chipW,cy+chipH,cx,cy+chipH,cr);
+          ctx.arcTo(cx,cy+chipH,cx,cy,cr); ctx.arcTo(cx,cy,cx+chipW,cy,cr); ctx.closePath(); ctx.fill();
+          ctx.drawImage(LOGO, cx+12, cy+12, lw, lhh);
+        }
+      }
+
+      if (b.kind === "photo") {
+        if (b._img) paint();
+        else getImg(b.src, function (im) { b._img = im; if (bg() === b) draw(); });
+        if (!b._img) { ctx.fillStyle = navy; ctx.fillRect(0,0,W,H); }
+      } else paint();
+    }
+
+    var LOGO = new Image();
+    LOGO.src = "assets/logos/white-cane-day-walk-logo.png";
+    LOGO.addEventListener("load", draw);
+
+    $("#stDownload").addEventListener("click", function () {
+      var f = fmt();
+      canvas.toBlob(function (blob) {
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "wcdw-" + f.id + "-" + f.w + "x" + f.h + ".png";
+        document.body.appendChild(a); a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      }, "image/png");
+    });
+    $("#stCaption").addEventListener("click", function () {
+      var cap = st.head + " " + CAPTION_BODY + (st.cta !== "None" ? " " + st.cta.replace(/\.$/, "") + " at whitecanedaywalk.com." : " Register at whitecanedaywalk.com.");
+      copyText(cap, "Caption copied — paste it with your graphic");
+    });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.load('800 60px Montserrat').then(function(){ document.fonts.ready.then(draw); });
+    }
+    draw();
+  })();
+
   /* ---------- Palette swatches ---------- */
   $("#swatches").innerHTML = PALETTE.map(function (p) {
     return '<button class="swatch" type="button" data-copy="' + p.hex + '" data-copymsg="Copied ' + p.hex + '">' +
@@ -653,7 +907,6 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
     "logos":         { label: "Logo" },
     "brand":         { label: "Brand" },
     "photos":        { label: "Event photos" },
-    "social":        { label: "Social" },
     "email-banners": { label: "Email banners" }
   };
   function catLabel(c){ return (CAT_META[c] && CAT_META[c].label) || c; }

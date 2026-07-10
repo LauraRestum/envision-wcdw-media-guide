@@ -320,6 +320,7 @@
 <div class="tabwrap"><div class="tabs" role="tablist" aria-label="Guide sections">
   <button class="tab" role="tab" aria-selected="true" aria-controls="p-talk" id="t-talk" tabindex="0" onclick="showTab('talk')">Find your message</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="p-studio" id="t-studio" tabindex="-1" onclick="showTab('studio')">Mini studio</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-email" id="t-email" tabindex="-1" onclick="showTab('email')">Email builder</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="p-lang" id="t-lang" tabindex="-1" onclick="showTab('lang')">Language &amp; brand</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="p-assets" id="t-assets" tabindex="-1" onclick="showTab('assets')">Asset library</button>
 </div></div>
@@ -373,6 +374,34 @@
       </div>
       <div class="genstage">
         <canvas id="stCanvas" role="img" aria-label="Preview of your graphic"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Email builder ================= -->
+  <section class="panel" id="p-email" role="tabpanel" aria-labelledby="t-email" tabindex="0" hidden>
+    <span class="eyebrow">Email builder</span>
+    <h2 class="sec-title">Answer three questions, get the right email</h2>
+    <p class="sec-sub">Say who you are and what the email should do, fill in your details, and the approved email assembles itself — subject line, body, and one call to action. Copy the text into any email app, or grab the on-brand HTML version.</p>
+    <div class="gen">
+      <div class="gencontrols">
+        <p class="mini-l">1 · I am…</p>
+        <div class="filter-row" id="ebVoice"></div>
+        <p class="mini-l">2 · This email should…</p>
+        <div class="filter-row" id="ebPurpose"></div>
+        <p class="mini-l">3 · Fill in the blanks</p>
+        <input type="text" id="ebOrg" class="stinput" maxlength="48" placeholder="Your company, group or practice name" aria-label="Your company, group or practice name" style="margin-bottom:.5rem">
+        <input type="text" id="ebLink" class="stinput" maxlength="120" placeholder="Your team or giving page link (optional)" aria-label="Your team or giving page link (optional)" style="margin-bottom:.5rem">
+        <input type="text" id="ebName" class="stinput" maxlength="48" placeholder="Sign it — your name (optional)" aria-label="Your name for the sign-off (optional)">
+        <div class="stacts">
+          <button class="btn btn-green" id="ebCopyText" type="button">Copy email text</button>
+          <button class="btn btn-ghost" id="ebCopyHtml" type="button">Copy HTML</button>
+          <button class="btn btn-ghost" id="ebDownload" type="button">Download .html</button>
+        </div>
+        <p class="stnote" id="ebNote">Every email is assembled from the FY27 Messaging Guide with your details filled in. One call to action per email — the button links to your page if you added one, otherwise to whitecanedaywalk.com.</p>
+      </div>
+      <div class="genstage" style="padding:0;overflow:hidden">
+        <iframe id="ebFrame" title="Email preview" style="width:100%;min-height:640px;border:0;background:#eef2f8"></iframe>
       </div>
     </div>
   </section>
@@ -477,7 +506,7 @@
   mq.addEventListener('change',sync);})();
 
 /* tabs */
-var TAB_IDS=['talk','studio','lang','assets'];
+var TAB_IDS=['talk','studio','email','lang','assets'];
 function showTab(id){
   TAB_IDS.forEach(function(t){
     var tab=document.getElementById('t-'+t),panel=document.getElementById('p-'+t);
@@ -1049,6 +1078,155 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
       document.fonts.load('800 60px Montserrat').then(function(){ document.fonts.ready.then(draw); });
     }
     draw();
+  })();
+
+  /* ---------- Email builder ---------- */
+  (function () {
+    var frame = document.getElementById("ebFrame");
+    if (!frame) return;
+
+    var EB_VOICES = [
+      {id:"anyone",  label:"Just me / community member"},
+      {id:"company", label:"Company / sponsor", ph:"[Company]"},
+      {id:"captain", label:"Team captain"},
+      {id:"group",   label:"Community group", ph:"[Group name]"},
+      {id:"partner", label:"Vision care partner", ph:"[Practice name]"},
+      {id:"family",  label:"Family & friends"},
+      {id:"donor",   label:"Donor / supporter"},
+      {id:"walker",  label:"Walker (blind or low vision)", guard:true}
+    ];
+
+    var EMAILS = [
+      {voice:"anyone", purpose:"Invite anyone to the Walk",
+       subject:"Walk with us for independence", cta:"Register at whitecanedaywalk.com",
+       body:"After vision loss, even a familiar walk can require a new approach. The white cane stands for mobility, confidence and self-direction, and the White Cane Day Walk invites all of North Texas to stand behind that independence.\n\nJoin Envision Saturday, Oct. 17 at the Dallas Zoo for an evening of community, awareness and action supporting people who are blind or have low vision across North Texas."},
+      {voice:"company", purpose:"Invite my employees",
+       subject:"Assemble your team for the White Cane Day Walk", cta:"Start or join a [Company] team", useLink:true,
+       body:"[Company] is joining Envision for the White Cane Day Walk on Saturday, Oct. 17 at the Dallas Zoo. It is an evening of community, awareness and action supporting people who are blind or have low vision across North Texas, and a chance to show what inclusion looks like in motion."},
+      {voice:"company", purpose:"Ask my network to sponsor or give",
+       subject:"Put your brand beside local impact", cta:"Sponsor or start a company team",
+       body:"[Company] is supporting the White Cane Day Walk because independence is worth investing in. Funds raised support Envision's work for people who are blind or have low vision across North Texas, through employment, outreach, rehabilitation, education and research."},
+      {voice:"captain", purpose:"Recruit teammates",
+       subject:"Walk with me for independence", cta:"Join my team", useLink:true,
+       body:"I'm leading a team at Envision's White Cane Day Walk on Saturday, Oct. 17 at the Dallas Zoo. The Walk celebrates the independence the white cane represents and supports Envision's work for people who are blind or have low vision across North Texas. Walk with me."},
+      {voice:"captain", purpose:"Ask for donations",
+       subject:"Every step counts. Will you back mine?", cta:"Make a gift on my page", useLink:true,
+       body:"I'm walking in the White Cane Day Walk on Saturday, Oct. 17 at the Dallas Zoo. Funds raised support Envision's work for people who are blind or have low vision across North Texas. A gift of any size helps build independence in our community."},
+      {voice:"group", purpose:"Invite my group's members",
+       subject:"Bring your team. Walk with us.", cta:"Start a [Group name] team", useLink:true,
+       body:"[Group name] is invited to walk in the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo. It is an evening of community, awareness and action supporting people who are blind or have low vision across North Texas, and a natural fit for groups who show up for their neighbors."},
+      {voice:"partner", purpose:"Share with my patients & network",
+       subject:"Help more North Texans connect to support", cta:"Share the Walk with your network",
+       body:"As a vision care professional, you see every day how life changes after vision loss. The White Cane Day Walk connects your patients and networks to Envision's work for people who are blind or have low vision across North Texas, including employment, rehabilitation, education, outreach and research.\n\nShare the Walk with your patients, recruit your staff, or start a practice team. Saturday, Oct. 17 at the Dallas Zoo."},
+      {voice:"family", purpose:"Invite friends & family",
+       subject:"Walk for someone you love", cta:"Walk in honor of someone", useLink:true,
+       body:"The White Cane Day Walk is a chance to walk, fundraise or build a team in support of someone you care about. Join Envision Saturday, Oct. 17 at the Dallas Zoo and stand behind the independence the white cane represents."},
+      {voice:"family", purpose:"Ask for donations",
+       subject:"Will you make a gift or walk with me?", cta:"Make a gift", useLink:true,
+       body:"I'm walking in the White Cane Day Walk in honor of someone I love. Funds raised support Envision's work for people who are blind or have low vision across North Texas. Will you make a gift or walk with me?"},
+      {voice:"donor", purpose:"Invite my network",
+       subject:"Independence is worth investing in", cta:"Register or donate today",
+       body:"I support Envision because independence is worth investing in. Each year, Envision serves thousands of North Texans who are blind or have low vision through employment, outreach, rehabilitation, education and research. The White Cane Day Walk is the community's chance to stand behind that work. Join me on Oct. 17."},
+      {voice:"walker", purpose:"Invite people to walk with me",
+       subject:"Walk with me for independence", cta:"Join my team", useLink:true, guard:true,
+       body:"My white cane stands for mobility, confidence and self-direction. I walk in the White Cane Day Walk to raise awareness and help the next person navigating vision loss connect to support. Walk with me on Saturday, Oct. 17 at the Dallas Zoo."}
+    ];
+
+    var eb = { voice:"anyone", purpose:EMAILS[0].purpose, org:"", link:"", name:"" };
+    var voiceEl = document.getElementById("ebVoice"), purposeEl = document.getElementById("ebPurpose");
+
+    function ebVoice(){ return EB_VOICES.filter(function(v){ return v.id === eb.voice; })[0]; }
+    function ebEmail(){
+      var list = EMAILS.filter(function(e){ return e.voice === eb.voice; });
+      return list.filter(function(e){ return e.purpose === eb.purpose; })[0] || list[0];
+    }
+    function fill(t) {
+      var v = ebVoice();
+      return (v.ph && eb.org) ? t.split(v.ph).join(eb.org) : t;
+    }
+    function link() {
+      return eb.link || "https://whitecanedaywalk.com";
+    }
+
+    function paintVoices() {
+      voiceEl.innerHTML = EB_VOICES.map(function (v) {
+        return '<button class="chip" data-id="' + v.id + '" aria-pressed="' + (eb.voice === v.id ? "true" : "false") + '">' + esc(v.label) + '</button>';
+      }).join("");
+    }
+    function paintPurposes() {
+      var list = EMAILS.filter(function(e){ return e.voice === eb.voice; });
+      if (!list.some(function(e){ return e.purpose === eb.purpose; })) eb.purpose = list[0].purpose;
+      purposeEl.innerHTML = list.map(function (e) {
+        return '<button class="chip" data-id="' + esc(e.purpose) + '" aria-pressed="' + (eb.purpose === e.purpose ? "true" : "false") + '">' + esc(e.purpose) + '</button>';
+      }).join("");
+    }
+    voiceEl.addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      eb.voice = b.getAttribute("data-id");
+      paintVoices(); paintPurposes(); paintNote(); render();
+    });
+    purposeEl.addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      eb.purpose = b.getAttribute("data-id");
+      paintPurposes(); render();
+    });
+    ["ebOrg","ebLink","ebName"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", function (e) {
+        eb[id === "ebOrg" ? "org" : id === "ebLink" ? "link" : "name"] = e.target.value.trim();
+        render();
+      });
+    });
+    function paintNote() {
+      document.getElementById("ebNote").textContent = ebVoice().guard
+        ? "Template only: real participants speak for themselves. Validate the email with the participant before sending on their behalf, and never send a template as if it were a real person's words."
+        : "Every email is assembled from the FY27 Messaging Guide with your details filled in. One call to action per email — the button links to your page if you added one, otherwise to whitecanedaywalk.com.";
+    }
+
+    function emailText() {
+      var e = ebEmail();
+      return "Subject: " + fill(e.subject) + "\n\n" + fill(e.body) +
+        "\n\n" + fill(e.cta) + ": " + link() +
+        (eb.name ? "\n\n" + eb.name : "");
+    }
+    function emailHtml() {
+      var e = ebEmail();
+      var paras = fill(e.body).split("\n\n").map(function (p) {
+        return '<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#0e1830">' + esc(p) + '</p>';
+      }).join("");
+      return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(fill(e.subject)) + '</title></head>' +
+        '<body style="margin:0;padding:0;background:#eef2f8;font-family:Montserrat,Arial,Helvetica,sans-serif">' +
+        '<div style="max-width:600px;margin:0 auto;padding:24px 16px">' +
+        '<div style="height:6px;background:#003087;border-radius:3px 3px 0 0;overflow:hidden"><div style="width:22%;height:6px;background:#78BE21"></div></div>' +
+        '<div style="background:#002855;color:#ffffff;padding:28px 28px 24px">' +
+        '<div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#78BE21;margin-bottom:8px">White Cane Day Walk</div>' +
+        '<div style="font-size:26px;font-weight:800;line-height:1.15">' + esc(fill(e.subject)) + '</div>' +
+        '<div style="font-size:13px;color:#c7d3e6;margin-top:10px">Saturday, Oct. 17 · 5–7 PM · Dallas Zoo</div>' +
+        '</div>' +
+        '<div style="background:#ffffff;padding:28px">' + paras +
+        '<div style="margin:24px 0 8px"><a href="' + esc(link()) + '" style="display:inline-block;background:#78BE21;color:#002855;font-size:15px;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:8px">' + esc(fill(e.cta)) + '</a></div>' +
+        (eb.name ? '<p style="margin:20px 0 0;font-size:15px;color:#0e1830">' + esc(eb.name) + '</p>' : '') +
+        '</div>' +
+        '<div style="padding:16px 8px;font-size:12px;color:#556275;text-align:center">White Cane Day Walk · Saturday, Oct. 17 · Dallas Zoo · <a href="https://whitecanedaywalk.com" style="color:#003087">whitecanedaywalk.com</a></div>' +
+        '</div></body></html>';
+    }
+    function render() { frame.srcdoc = emailHtml(); }
+
+    document.getElementById("ebCopyText").addEventListener("click", function () {
+      copyText(emailText(), ebVoice().guard ? "Copied — validate with the participant first" : "Email copied — paste it into any email app");
+    });
+    document.getElementById("ebCopyHtml").addEventListener("click", function () {
+      copyText(emailHtml(), "HTML copied — paste into your email tool's HTML editor");
+    });
+    document.getElementById("ebDownload").addEventListener("click", function () {
+      var blob = new Blob([emailHtml()], { type: "text/html" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "wcdw-email.html";
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    });
+
+    paintVoices(); paintPurposes(); paintNote(); render();
   })();
 
   /* ---------- Palette swatches ---------- */

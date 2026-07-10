@@ -154,6 +154,9 @@
   .stinput{width:100%;border:1px solid var(--line);border-radius:8px;padding:.6rem .7rem;
     font-family:inherit;font-size:.85rem;color:var(--ink);background:var(--card)}
   .stinput:focus{outline:none;border-color:var(--green)}
+  .uploadchip{display:inline-block;margin-top:.5rem;border:1px dashed var(--line);border-radius:999px;
+    padding:.42rem 1rem;font-size:.75rem;font-weight:600;color:var(--ink);cursor:pointer;transition:border-color .15s}
+  .uploadchip:hover{border-color:var(--green)}
   .stcheck{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;color:var(--ink);margin:1rem 0 .2rem;cursor:pointer}
   .stcheck input{width:16px;height:16px;accent-color:var(--green)}
   .stacts{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
@@ -362,6 +365,9 @@
         <div class="filter-row" id="stFormat"></div>
         <p class="mini-l">Background</p>
         <div class="filter-row" id="stBg"></div>
+        <label class="uploadchip" for="stUpload">⬆ Use your own photo</label>
+        <input type="file" id="stUpload" accept="image/*" hidden>
+        <p style="font-size:.72rem;color:var(--muted);margin:.35rem 0 0">Your photo never leaves your device — it's only used to draw the graphic.</p>
         <p class="mini-l">Call to action</p>
         <div class="filter-row" id="stCta"></div>
         <label class="stcheck"><input type="checkbox" id="stLogo" checked> Show the event logo</label>
@@ -395,10 +401,11 @@
         <input type="text" id="ebName" class="stinput" maxlength="48" placeholder="Sign it — your name (optional)" aria-label="Your name for the sign-off (optional)">
         <div class="stacts">
           <button class="btn btn-green" id="ebCopyText" type="button">Copy email text</button>
+          <button class="btn btn-ghost" id="ebHeader" type="button">Download header image</button>
           <button class="btn btn-ghost" id="ebCopyHtml" type="button">Copy HTML</button>
           <button class="btn btn-ghost" id="ebDownload" type="button">Download .html</button>
         </div>
-        <p class="stnote" id="ebNote">Every email is assembled from the FY27 Messaging Guide with your details filled in. One call to action per email — the button links to your page if you added one, otherwise to whitecanedaywalk.com.</p>
+        <p class="stnote" id="ebNote">No HTML needed: copy the email text into any email app, download the header image, drop it at the top of your email, and link the image to whitecanedaywalk.com. The HTML buttons are there if your email tool supports them.</p>
       </div>
       <div class="genstage" style="padding:0;overflow:hidden">
         <iframe id="ebFrame" title="Email preview" style="width:100%;min-height:640px;border:0;background:#eef2f8"></iframe>
@@ -895,6 +902,25 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
     $("#stLogo").addEventListener("change", function (e) { st.logo = e.target.checked; draw(); });
     $("#stCustom").addEventListener("input", function (e) { st.custom = e.target.value.trim(); draw(); });
 
+    // user-supplied photo background (stays local; never uploaded anywhere)
+    var UP = { id:"upload", label:"Your photo", kind:"photo" };
+    $("#stUpload").addEventListener("change", function (e) {
+      var f = e.target.files && e.target.files[0]; if (!f) return;
+      var url = URL.createObjectURL(f);
+      var im = new Image();
+      im.onload = function () {
+        UP._img = im;
+        if (BGS.indexOf(UP) === -1) BGS.push(UP);
+        st.bg = "upload";
+        var el = $("#stBg");
+        el.innerHTML = BGS.map(function (b) {
+          return '<button class="chip" data-id="' + b.id + '" aria-pressed="' + (st.bg === b.id ? "true" : "false") + '">' + esc(b.label) + '</button>';
+        }).join("");
+        draw();
+      };
+      im.src = url;
+    });
+
     function voice(){ return VOICES.filter(function(v){ return v.id === st.voice; })[0]; }
     // picking a voice pre-selects its natural graphic statement and updates the guardrail note
     $("#stVoice").addEventListener("click", function (e) {
@@ -1179,7 +1205,7 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
     function paintNote() {
       document.getElementById("ebNote").textContent = ebVoice().guard
         ? "Template only: real participants speak for themselves. Validate the email with the participant before sending on their behalf, and never send a template as if it were a real person's words."
-        : "Every email is assembled from the FY27 Messaging Guide with your details filled in. One call to action per email — the button links to your page if you added one, otherwise to whitecanedaywalk.com.";
+        : "No HTML needed: copy the email text into any email app, download the header image, drop it at the top of your email, and link the image to whitecanedaywalk.com. The HTML buttons are there if your email tool supports them.";
     }
 
     function emailText() {
@@ -1213,6 +1239,52 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
 
     document.getElementById("ebCopyText").addEventListener("click", function () {
       copyText(emailText(), ebVoice().guard ? "Copied — validate with the participant first" : "Email copied — paste it into any email app");
+    });
+    document.getElementById("ebHeader").addEventListener("click", function () {
+      var e = ebEmail();
+      var c = document.createElement("canvas"); c.width = 1200; c.height = 360;
+      var x = c.getContext("2d");
+      function wrapH(text, font, maxW) {
+        x.font = font;
+        var words = text.split(" "), lines = [], line = "";
+        words.forEach(function (w) {
+          var t = line ? line + " " + w : w;
+          if (x.measureText(t).width > maxW && line) { lines.push(line); line = w; }
+          else line = t;
+        });
+        if (line) lines.push(line);
+        return lines;
+      }
+      function render() {
+        x.fillStyle = "#002855"; x.fillRect(0, 0, 1200, 360);
+        x.fillStyle = "#78BE21"; x.fillRect(0, 0, 264, 8);
+        x.fillStyle = "#003087"; x.fillRect(264, 0, 936, 8);
+        x.textBaseline = "alphabetic";
+        x.fillStyle = "#78BE21"; x.font = "700 22px Montserrat, Arial, sans-serif";
+        var ey = "WHITE CANE DAY WALK", cx = 64;
+        for (var i = 0; i < ey.length; i++) { x.fillText(ey[i], cx, 84); cx += x.measureText(ey[i]).width + 6; }
+        var size = 64, lines, font;
+        do {
+          font = "800 " + size + "px Montserrat, Arial, sans-serif";
+          lines = wrapH(fill(e.subject), font, 1072);
+          size -= 4;
+        } while (lines.length * size * 1.15 > 170 && size > 30);
+        size += 4;
+        x.font = font; x.fillStyle = "#ffffff";
+        var lh = Math.round(size * 1.12), y = 160;
+        lines.forEach(function (ln, i) { x.fillText(ln, 64, y + i * lh); });
+        x.font = "600 26px Montserrat, Arial, sans-serif"; x.fillStyle = "#c7d3e6";
+        x.fillText("Saturday, Oct. 17 · 5–7 PM · Dallas Zoo", 64, y + (lines.length - 1) * lh + 58);
+        c.toBlob(function (blob) {
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "wcdw-email-header.png";
+          document.body.appendChild(a); a.click();
+          setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+        }, "image/png");
+        toast("Header downloaded — link the image to whitecanedaywalk.com in your email");
+      }
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(render); else render();
     });
     document.getElementById("ebCopyHtml").addEventListener("click", function () {
       copyText(emailHtml(), "HTML copied — paste into your email tool's HTML editor");

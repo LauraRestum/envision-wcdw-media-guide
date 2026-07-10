@@ -326,7 +326,7 @@
   <section class="panel" id="p-talk" role="tabpanel" aria-labelledby="t-talk" tabindex="0">
     <span class="eyebrow">Find your message</span>
     <h2 class="sec-title">Who are you, and what do you need to do?</h2>
-    <p class="sec-sub">Whether you're rallying your employees, growing your team, fundraising, or telling the story publicly — pick who you are and what you're trying to do, and you'll see only the approved copy that fits. Every block is ready to copy and paste, word for word, from the 2026 Messaging Guide.</p>
+    <p class="sec-sub">Whether you're rallying your employees, growing your team, fundraising, or telling the story publicly — pick who you are and what you're trying to do, and you'll see only the approved copy that fits. Every block is ready to copy and paste, word for word, from the FY27 Messaging Guide and the Audience Content Bank.</p>
 
     <p class="mini-l" style="font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 .5rem">I am…</p>
     <div class="filter-row" id="whoChips" role="group" aria-label="Who you are"></div>
@@ -361,7 +361,7 @@
           <button class="btn btn-green" id="stDownload" type="button">Download PNG</button>
           <button class="btn btn-ghost" id="stCaption" type="button">Copy matching caption</button>
         </div>
-        <p class="stnote">Everything here is preapproved — headlines and captions come from the 2026 Messaging Guide, colors and type from the brand palette. One call to action per asset.</p>
+        <p class="stnote">Everything here is preapproved — headlines and captions come from the FY27 Messaging Guide, colors and type from the brand palette. One call to action per asset.</p>
       </div>
       <div class="genstage">
         <canvas id="stCanvas" role="img" aria-label="Preview of your graphic"></canvas>
@@ -376,10 +376,12 @@
     <p class="sec-sub">A handful of swaps keep everything on-message. When in doubt: lead with independence, center the person.</p>
     <div class="langcard" style="padding:.4rem 1.3rem">
       <div class="swap"><span class="from">“visually impaired,” “the blind,” “BVI”</span><span class="arr" aria-hidden="true">→</span><span class="to">people who are blind or have low vision</span></div>
-      <div class="swap"><span class="from">“Envision Dallas”</span><span class="arr" aria-hidden="true">→</span><span class="to">Envision <small>(“Envision in North Texas” for context)</small></span></div>
-      <div class="swap"><span class="from">“suffers from vision loss”</span><span class="arr" aria-hidden="true">→</span><span class="to">“is blind or has low vision” <small>(agency, not pity)</small></span></div>
-      <div class="swap"><span class="from">“Join us at the Dallas Zoo!”</span><span class="arr" aria-hidden="true">→</span><span class="to">“Walk with us for independence.” <small>(the Zoo is the venue, not the story)</small></span></div>
-      <div class="swap"><span class="from">“the Envision Dallas Foundation”</span><span class="arr" aria-hidden="true">→</span><span class="to">Envision's Dallas Foundation <small>(with the apostrophe)</small></span></div>
+      <div class="swap"><span class="from">“Envision Dallas,” a foundation name</span><span class="arr" aria-hidden="true">→</span><span class="to">Envision <small>(Envision is the organization; “Envision in North Texas” for context)</small></span></div>
+      <div class="swap"><span class="from">“suffers from vision loss”</span><span class="arr" aria-hidden="true">→</span><span class="to">“is blind or has low vision” <small>(capability, never pity)</small></span></div>
+      <div class="swap"><span class="from">“Join us at the Dallas Zoo!”</span><span class="arr" aria-hidden="true">→</span><span class="to">“Walk with us for independence.” <small>(the Zoo is the setting, never the pitch)</small></span></div>
+      <div class="swap"><span class="from">“3rd Annual White Cane Day Walk”</span><span class="arr" aria-hidden="true">→</span><span class="to">White Cane Day Walk <small>(no annual numbering)</small></span></div>
+      <div class="swap"><span class="from">“helped 1,200 people last year”</span><span class="arr" aria-hidden="true">→</span><span class="to">“serves thousands of North Texans locally each year” <small>(the only approved stat)</small></span></div>
+      <div class="swap"><span class="from">“jobs, education and research”</span><span class="arr" aria-hidden="true">→</span><span class="to">employment, outreach, rehabilitation, education and research <small>(always these five, in this order)</small></span></div>
     </div>
     <div class="pillars" role="group" aria-label="The five message pillars">
       <span>Independence</span><span>Awareness</span><span>Opportunity</span><span>Community</span><span>Local impact</span>
@@ -428,7 +430,7 @@
   <p><b>Photo use:</b> event photos contain identifiable attendees. Use them in coverage or promotion of Envision and the White Cane Day Walk only, per Envision's photo-consent and privacy practices. Credit “Courtesy of Envision” where a credit is customary.</p>
   <p><b>Questions or higher-resolution files?</b> Reach the team through <a href="https://envisiondallas.org" target="_blank" rel="noopener">envisiondallas.org</a> · Registration and giving: <a href="https://whitecanedaywalk.com" target="_blank" rel="noopener">whitecanedaywalk.com</a></p>
 </div>
-<footer class="app">White Cane Day Walk 2026 · Media &amp; Partner Guide · Built on the 2026 Messaging Guide</footer>
+<footer class="app">White Cane Day Walk 2026 · Media &amp; Partner Guide · Built on the FY27 Messaging Guide + Audience Content Bank</footer>
 
 <dialog class="lb" id="lb" aria-label="Asset preview">
   <button class="lb-close" id="lbClose" type="button" aria-label="Close preview">
@@ -516,7 +518,7 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
     if (b) copyText(b.getAttribute("data-copy"), b.getAttribute("data-copymsg") || "Copied to clipboard");
   });
 
-  /* ---------- Approved copy (2026 Messaging Guide), tagged by who + goal ---------- */
+  /* ---------- Approved copy (FY27 Audience Content Bank), tagged by who + goal ---------- */
   var WHO = [
     {id:"all",       label:"Anyone"},
     {id:"corporate", label:"Company / sponsor"},
@@ -540,89 +542,172 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
 
   /* who: [] = fits anyone; goal: which jobs this copy does */
   var MESSAGES = [
-    // --- Rally your company / employees ---
-    {tag:"Internal announcement to employees", who:["corporate"], goal:["internal","team"],
-     head:"Assemble your team. Walk with us.", cta:"Start a company team",
-     body:"Bring your team and show North Texas what inclusion looks like in motion. Join Envision for the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo. Register, start a team or make a gift to support Envision’s work for people who are blind or have low vision across North Texas.",
-     note:"Works as an all-staff email, Slack post, or intranet announcement."},
-    {tag:"Corporate partners / sponsors", who:["corporate"], goal:["internal","announce","team"],
-     head:"Assemble your team. Walk with us.", cta:"Sponsor, start a company team or share",
-     body:"Bring your team and show North Texas what inclusion looks like in motion. Join Envision and help support local programs and services."},
-    {tag:"Returning walkers", who:["returning","corporate"], goal:["internal","team"],
-     head:"You walked. Now lead the way.", cta:"Start a team",
-     body:"You walked with us before. This year, bring others with you. Start a team and help support independence across North Texas."},
+    // ===== Anyone =====
+    {tag:"Email · general invitation", who:[], goal:["announce"],
+     subject:"Walk with us for independence", cta:"Register at whitecanedaywalk.com",
+     body:"After vision loss, even a familiar walk can require a new approach. The white cane stands for mobility, confidence and self-direction, and the White Cane Day Walk invites all of North Texas to stand behind that independence.\n\nJoin Envision Saturday, Oct. 17 at the Dallas Zoo for an evening of community, awareness and action supporting people who are blind or have low vision across North Texas."},
+    {tag:"Social · launch", who:[], goal:["announce"],
+     body:"Walk with us for independence. The White Cane Day Walk returns Saturday, Oct. 17 at the Dallas Zoo. Join Envision for an evening of community, awareness and action supporting people who are blind or have low vision across North Texas. Register today."},
+    {tag:"Social · short awareness", who:[], goal:["announce"],
+     body:"Who do you walk for? Join Envision at the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo. Register at whitecanedaywalk.com."},
 
-    // --- Start or grow a team ---
-    {tag:"Team recruitment", who:[], goal:["team","internal"],
+    // ----- Explaining Envision, by length -----
+    {tag:"Five words", who:[], goal:["about"],
+     body:"Envision builds independence in North Texas."},
+    {tag:"One sentence · the anchor", who:[], goal:["about"],
+     body:"Envision serves people who are blind or have low vision across North Texas through employment, outreach, rehabilitation, education and research.",
+     note:"The service list is always the same five words in the same order."},
+    {tag:"Two sentences · adds the Walk", who:[], goal:["about"],
+     body:"Envision serves people who are blind or have low vision across North Texas through employment, outreach, rehabilitation, education and research. The White Cane Day Walk is how the community is invited into that work."},
+    {tag:"Short paragraph · email, web, print", who:[], goal:["about"],
+     body:"Envision works to improve quality of life and provide inspiration and opportunity for people who are blind or have low vision through employment, outreach, rehabilitation, education and research. Across North Texas, that work looks like real programs and services helping people build independence, confidence and connection. The White Cane Day Walk, held Saturday, Oct. 17 at the Dallas Zoo, is the community's invitation to walk with us for independence."},
+    {tag:"Full paragraph · media, formal, long-form", who:[], goal:["about"],
+     body:"After vision loss, even a familiar walk can require a new approach. Envision exists so that new approach never has to mean less independence. Through employment, outreach, rehabilitation, education and research, Envision helps people who are blind or have low vision build skills, access tools and find support to keep moving forward. Across North Texas, funds raised through the White Cane Day Walk support that work directly, and the Walk itself, Saturday, Oct. 17 at the Dallas Zoo, invites the whole community to stand behind the independence the white cane represents."},
+    {tag:"Conversation-ready one-liner", who:[], goal:["about"],
+     body:"Envision serves people who are blind or have low vision across North Texas, and the White Cane Day Walk is the community's invitation to walk with them for independence."},
+    {tag:"In your voice · general community", who:[], goal:["about"],
+     body:"Envision is a North Texas organization serving people who are blind or have low vision, through employment, rehabilitation, education, outreach and research. The White Cane Day Walk is their big community event. Anyone can walk."},
+
+    // ----- Talking points: answering questions out loud -----
+    {tag:"Q: What is Envision?", who:[], goal:["about"],
+     body:"Envision is an organization serving people who are blind or have low vision across North Texas, through employment, outreach, rehabilitation, education and research.",
+     note:"Use these Q&A blocks as answers out loud, not a script. One idea per answer."},
+    {tag:"Q: What is the White Cane Day Walk?", who:[], goal:["about","announce"],
+     body:"It is Envision's community event celebrating the independence the white cane represents. Saturday, Oct. 17 at the Dallas Zoo. Anyone can register, start a team, give or share."},
+    {tag:"Q: What does the white cane mean?", who:[], goal:["about"],
+     body:"Mobility, confidence and self-direction. It is a symbol of independence, not limitation."},
+    {tag:"Q: Where does the money go?", who:[], goal:["about","fundraise"],
+     body:"Funds raised support Envision's work for people who are blind or have low vision across North Texas."},
+    {tag:"Q: Do I have to fundraise to walk?", who:[], goal:["about"],
+     body:"No. Fundraising is encouraged because every gift helps support local programs and services, but you can register, donate, start a team or simply invite others."},
+    {tag:"Q: Is this a zoo event?", who:[], goal:["about"],
+     body:"The Dallas Zoo is the setting and the experience. The reason to come is independence, community and local impact."},
+
+    {tag:"Team recruitment · any audience", who:[], goal:["team","internal"],
      head:"Start your team.", cta:"Start a team",
      body:"Start your team and invite others to walk with you for independence. Bring friends, family, coworkers or your community group to the White Cane Day Walk and help support independence across North Texas."},
-    {tag:"Family, loved ones & champions", who:["family"], goal:["team","fundraise","announce"],
-     head:"Walk for someone you love.", cta:"Walk in honor of someone, start a team",
-     body:"Walk, fundraise or start a team in honor of someone you love. Invite friends and family to join you and help support independence across North Texas."},
-    {tag:"Walkers who are blind or have low vision", who:["walker"], goal:["team","announce"],
-     head:"Why I walk.", cta:"Walk with me / share your reason",
-     body:"I walk to raise awareness and help others connect to support, for me, my community and the next person navigating vision loss.",
-     note:"Validate language with participants before public use."},
-    {tag:"Vision care & referral partners", who:["partner"], goal:["team","announce","internal"],
-     head:"Help more North Texans connect to support.", cta:"Partner with us, start a team or share the Walk",
-     body:"Partner with Envision for the White Cane Day Walk. Sponsor, start a team, recruit staff or share the Walk with your patients and networks to connect more North Texans to support, services and independence."},
 
-    // --- Fundraise / ask for gifts ---
-    {tag:"Team fundraising ask", who:[], goal:["fundraise"],
-     head:"Independence is worth investing in.", cta:"Make a gift",
-     body:"Envision serves thousands of North Texans who are blind or have low vision locally each year. Your gift through the Walk helps build independence across North Texas.",
-     note:"Use for a team page, fundraising email, or sponsor ask."},
+    // ===== Company / sponsor =====
+    {tag:"Email · to your employees", who:["corporate"], goal:["internal","team"],
+     subject:"Assemble your team for the White Cane Day Walk", cta:"Start or join a [Company] team",
+     body:"[Company] is joining Envision for the White Cane Day Walk on Saturday, Oct. 17 at the Dallas Zoo. It is an evening of community, awareness and action supporting people who are blind or have low vision across North Texas, and a chance to show what inclusion looks like in motion.",
+     note:"Replace [Company] with your organization's name."},
+    {tag:"Slack / Teams post", who:["corporate"], goal:["internal","team"],
+     body:"We're walking with Envision at the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo. Bring your family, bring a friend, and help support independence across North Texas. Join the [Company] team here: [link]",
+     note:"Swap in your company name and team link."},
+    {tag:"Employee announcement · intranet", who:["corporate"], goal:["internal"],
+     cta:"Register or start a team",
+     body:"Join us for the White Cane Day Walk. Employees are invited to join Envision for the White Cane Day Walk on Saturday, Oct. 17 at the Dallas Zoo. This event brings the North Texas community together to support Envision's work for people who are blind or have low vision. Employees can register, start or join a team, make a gift or help spread the word."},
+    {tag:"Department challenge", who:["corporate"], goal:["internal","team"],
+     body:"Which department will bring the most walkers? Start or join your department's team for the White Cane Day Walk and help support independence across North Texas. Every registration counts. Sign up by [date] to be counted in the challenge."},
+    {tag:"Employee social-sharing reminder", who:["corporate"], goal:["internal","announce"],
+     body:"Already registered? Help spread the word. Share the White Cane Day Walk with your friends, family and neighbors, and invite them to walk with us for independence on Oct. 17 at the Dallas Zoo. Share whitecanedaywalk.com."},
+    {tag:"Registration nudge · Slack or intranet", who:["corporate"], goal:["internal"],
+     body:"The White Cane Day Walk is Saturday, Oct. 17 at the Dallas Zoo. Register, start a team or join one. Walk with us for independence."},
+    {tag:"LinkedIn · corporate voice", who:["corporate"], goal:["announce","team"],
+     body:"Assemble your team. Walk with us. The White Cane Day Walk is an opportunity for companies to stand with Envision in support of people who are blind or have low vision across North Texas. Bring your team to the Dallas Zoo on Oct. 17 and show North Texas what inclusion looks like in motion. Start a company team today."},
+    {tag:"LinkedIn · sponsor announcement", who:["corporate"], goal:["announce"],
+     body:"[Company] is proud to sponsor the White Cane Day Walk with Envision. On Saturday, Oct. 17 at the Dallas Zoo, North Texas comes together to celebrate independence and support Envision's work for people who are blind or have low vision. Walk with us.",
+     note:"Adapt per partner; replace [Company]."},
+    {tag:"Email · sponsor-to-network", who:["corporate"], goal:["fundraise"],
+     subject:"Put your brand beside local impact", cta:"Sponsor or start a company team",
+     body:"[Company] is supporting the White Cane Day Walk because independence is worth investing in. Funds raised support Envision's work for people who are blind or have low vision across North Texas, through employment, outreach, rehabilitation, education and research."},
+    {tag:"In your voice · company or sponsor", who:["corporate"], goal:["about","internal"],
+     body:"Envision serves people who are blind or have low vision across North Texas through employment, outreach, rehabilitation, education and research. Sponsoring the White Cane Day Walk puts our brand beside that local impact and shows North Texas what inclusion looks like in motion."},
+
+    // ===== Team captain / returning walker =====
+    {tag:"Email · returning walker recruitment", who:["returning"], goal:["team"],
+     subject:"You walked. Now lead the way.", cta:"Start your team",
+     body:"You were part of the White Cane Day Walk before. This year, bring others with you. Starting a team is one of the best ways to bring friends, family, coworkers or community groups together around the Walk, and every team helps support independence across North Texas."},
+    {tag:"Social · team recruitment", who:["returning"], goal:["team"],
+     body:"You walked. Now lead the way. Start a team for the White Cane Day Walk and invite your family, friends, coworkers or community group to join you. Saturday, Oct. 17 at the Dallas Zoo."},
+    {tag:"Text · peer-to-peer invite", who:["returning"], goal:["team","internal"],
+     body:"I'm leading a team at Envision's White Cane Day Walk on Oct. 17 at the Dallas Zoo. Walk with me for independence. Join my team here: [link]"},
+    {tag:"Peer-to-peer fundraising · email or DM", who:["returning","family"], goal:["fundraise"],
+     subject:"Every step counts. Will you back mine?", cta:"Make a gift on my page",
+     body:"I'm walking in the White Cane Day Walk on Saturday, Oct. 17 at the Dallas Zoo. Funds raised support Envision's work for people who are blind or have low vision across North Texas. A gift of any size helps build independence in our community."},
+    {tag:"Social · fundraising milestone", who:["returning"], goal:["fundraise"],
+     body:"Go the extra mile for independence. My team is fundraising for the White Cane Day Walk, and every dollar raised helps support Envision programs and services across North Texas. Help us reach our goal."},
+    {tag:"Social · countdown share", who:["returning"], goal:["announce"],
+     body:"The White Cane Day Walk is almost here. Saturday, Oct. 17 at the Dallas Zoo. Walk with my team for independence. Register at whitecanedaywalk.com."},
+    {tag:"In your voice · team captain", who:["returning"], goal:["about"],
+     body:"I walk with Envision. They help people who are blind or have low vision across North Texas build independence, through jobs, training, education and support. The Walk is how the rest of us get to be part of it."},
+
+    // ===== Community group =====
+    {tag:"Email · to group members", who:["community"], goal:["team","internal"],
+     subject:"Bring your team. Walk with us.", cta:"Start a [Group name] team",
+     body:"[Group name] is invited to walk in the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo. It is an evening of community, awareness and action supporting people who are blind or have low vision across North Texas, and a natural fit for groups who show up for their neighbors.",
+     note:"Works for churches, civic clubs, Rotary, Lions and chambers."},
+    {tag:"Meeting announcement · read aloud", who:["community"], goal:["team","internal"],
+     body:"Envision is hosting the White Cane Day Walk on Saturday, October 17 at the Dallas Zoo. The Walk celebrates the independence represented by the white cane and supports Envision's work for people who are blind or have low vision across North Texas. Let's put together a team. Sign up at whitecanedaywalk.com."},
+    {tag:"Newsletter blurb · drop-in", who:["community"], goal:["announce"],
+     body:"North Texas walks for independence. Join Envision Saturday, Oct. 17 at the Dallas Zoo for the White Cane Day Walk, an evening of community, awareness and action supporting people who are blind or have low vision across North Texas. Register at whitecanedaywalk.com."},
+    {tag:"In your voice · community group", who:["community"], goal:["about"],
+     body:"Envision is a local organization serving our neighbors who are blind or have low vision, across North Texas, through employment, rehabilitation, education, outreach and research. The White Cane Day Walk on Oct. 17 at the Dallas Zoo is a family-friendly way for our group to show up for them."},
+
+    // ===== Vision care partner =====
+    {tag:"Email · to providers & clinics", who:["partner"], goal:["announce","team"],
+     subject:"Help more North Texans connect to support", cta:"Share the Walk with your network",
+     body:"As a vision care professional, you see every day how life changes after vision loss. The White Cane Day Walk connects your patients and networks to Envision's work for people who are blind or have low vision across North Texas, including employment, rehabilitation, education, outreach and research.\n\nShare the Walk with your patients, recruit your staff, or start a practice team. Saturday, Oct. 17 at the Dallas Zoo."},
+    {tag:"Waiting room · patient-facing blurb", who:["partner"], goal:["announce"],
+     body:"Walk with us for independence. The White Cane Day Walk brings the North Texas community together Saturday, Oct. 17 at the Dallas Zoo to celebrate independence and support people who are blind or have low vision. Everyone is welcome. Register at whitecanedaywalk.com."},
+    {tag:"Social · partner recruitment", who:["partner"], goal:["team"],
+     body:"Help more North Texans connect to support. Optometry, low-vision and O&M partners: sponsor, start a team or share the White Cane Day Walk with your patients and networks. Saturday, Oct. 17 at the Dallas Zoo."},
+    {tag:"In your voice · vision care partner", who:["partner"], goal:["about"],
+     body:"Envision provides services for people who are blind or have low vision across North Texas, including employment support, rehabilitation, education, outreach and research. The White Cane Day Walk is a good entry point for patients and families to connect with that support and community."},
+
+    // ===== Family & friends =====
+    {tag:"Email · family & champions", who:["family"], goal:["team","announce"],
+     subject:"Walk for someone you love", cta:"Walk in honor of someone · start a team",
+     body:"The White Cane Day Walk is a chance to walk, fundraise or build a team in support of someone you care about. Join Envision Saturday, Oct. 17 at the Dallas Zoo and stand behind the independence the white cane represents."},
+    {tag:"Social · family angle", who:["family"], goal:["team","announce"],
+     body:"Walk for someone you love. Build a team, invite friends and family, and help support independence across North Texas at the White Cane Day Walk. Saturday, Oct. 17 at the Dallas Zoo."},
+    {tag:"Peer-to-peer message", who:["family"], goal:["fundraise"],
+     body:"I'm walking in the White Cane Day Walk in honor of someone I love. Funds raised support Envision's work for people who are blind or have low vision across North Texas. Will you make a gift or walk with me? [link]"},
+    {tag:"In your voice · family & friends", who:["family"], goal:["about"],
+     body:"Envision supports people like the person I love, people who are blind or have low vision, with real services across North Texas. Employment. Rehabilitation. Education. The Walk is how I get to stand behind that."},
+
+    // ===== Donor / supporter =====
+    {tag:"Email · donor appeal", who:["donor"], goal:["fundraise"],
+     subject:"Independence is worth investing in", cta:"Register or donate today",
+     body:"After vision loss, everyday life can require a new approach. Each year, Envision serves thousands locally through employment, outreach, rehabilitation, education and research, helping people build independence, confidence and connection. This fall, the White Cane Day Walk brings the community together in support of that work. Join us Saturday, Oct. 17 at the Dallas Zoo."},
+    {tag:"Donor newsletter blurb", who:["donor"], goal:["fundraise"],
+     body:"Envision serves thousands of North Texans who are blind or have low vision locally each year. Your support helps build independence. Give or register to walk at whitecanedaywalk.com."},
+    {tag:"Social · donor impact", who:["donor"], goal:["fundraise","announce"],
+     body:"Vision can change. Independence does not have to. Each year, Envision helps thousands of North Texans who are blind or have low vision keep moving forward. Join the White Cane Day Walk and help support independence across North Texas."},
+    {tag:"Social · supporter share", who:["donor"], goal:["announce"],
+     body:"I support the White Cane Day Walk because independence is worth investing in. Join Envision Saturday, Oct. 17 at the Dallas Zoo. Register at whitecanedaywalk.com."},
+    {tag:"In your voice · donor", who:["donor"], goal:["about","fundraise"],
+     body:"Envision serves thousands of North Texans who are blind or have low vision locally each year, through employment, outreach, rehabilitation, education and research. Funds raised through the White Cane Day Walk support that work. Independence is worth investing in."},
     {tag:"Funds-raised line", who:[], goal:["fundraise"],
-     body:"Funds raised support Envision’s work for people who are blind or have low vision across North Texas.",
-     note:"The one-sentence answer to “where does the money go?”"},
-    {tag:"Final push", who:[], goal:["fundraise","team","announce","internal"],
-     head:"Every step counts.", cta:"Register, donate or start a team",
-     body:"The White Cane Day Walk is almost here. Register, donate or start a team today and help support Envision’s work across North Texas."},
+     body:"Funds raised support Envision's work for people who are blind or have low vision across North Texas.",
+     note:"The one-sentence answer to where the money goes. Use as written; every-dollar-directly-supports language is not approved."},
 
-    // --- Spread the word publicly ---
-    {tag:"Primary message", who:[], goal:["announce"],
-     body:"The White Cane Day Walk brings the North Texas community together to celebrate independence, raise awareness and support Envision’s work for people who are blind or have low vision."},
-    {tag:"Short version", who:[], goal:["announce","internal"],
-     head:"Walk with us for independence.", cta:"Register at whitecanedaywalk.com",
-     body:"Walk with us for independence. Join Envision at the Dallas Zoo for the White Cane Day Walk, an evening of community, awareness and action supporting people who are blind or have low vision across North Texas."},
-    {tag:"Expanded", who:[], goal:["announce"],
-     body:"Join Envision Saturday, October 17, at the Dallas Zoo for an evening of community, awareness and action in support of people who are blind or have low vision across North Texas. The White Cane Day Walk celebrates the independence represented by the white cane while supporting Envision’s work to improve quality of life and provide inspiration and opportunity through employment, outreach, rehabilitation, education and research."},
-    {tag:"Announcement / launch", who:[], goal:["announce","internal"],
-     head:"Walk with us for independence.", cta:"Register, start a team or make a gift",
-     body:"Walk with us for independence. The White Cane Day Walk returns Saturday, Oct. 17 at the Dallas Zoo. Join Envision for an evening of community, awareness and action supporting people who are blind or have low vision across North Texas. Register, start a team or make a gift today."},
-    {tag:"General / community", who:["community"], goal:["announce","team"],
-     head:"Walk with us for independence.", cta:"Register at whitecanedaywalk.com",
-     body:"Join Envision for the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo. Register, start a team or make a gift to support Envision’s work for people who are blind or have low vision across North Texas."},
-    {tag:"Media / public awareness", who:["media"], goal:["announce"],
-     head:"Walk with us for independence.", cta:"Register",
-     body:"The White Cane Day Walk brings the North Texas community together to celebrate independence, raise awareness and support Envision’s work for people who are blind or have low vision."},
+    // ===== Walker who is blind or has low vision =====
+    {tag:"Why-I-walk template · fill in the blank", who:["walker"], goal:["announce"],
+     body:"Why I walk: ______________________________.\nI walk to raise awareness and help others connect to support. For me, my community and the next person navigating vision loss. Walk with me at the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo.",
+     note:"Lived experience leads. Validate all why-I-walk language with participants who are blind or have low vision before public use. Never publish a composite voice as if it were a real participant."},
+    {tag:"Social · participant voice", who:["walker"], goal:["announce"],
+     body:"My white cane stands for mobility, confidence and self-direction. That's why I walk. Join me at the White Cane Day Walk with Envision, Saturday, Oct. 17 at the Dallas Zoo. Share your reason and walk with me.",
+     note:"Validate with the participant before public use."},
+    {tag:"Peer invitation · text or DM", who:["walker"], goal:["team"],
+     body:"I'm walking in the White Cane Day Walk on Oct. 17 at the Dallas Zoo, and I want you on my team. Walk with me for independence: [link]"},
+    {tag:"In your voice · participant", who:["walker"], goal:["about"],
+     body:"Envision is part of my community. They help people who are blind or have low vision build skills, access tools and find support to keep moving forward. My white cane stands for mobility, confidence and self-direction. The Walk celebrates that.",
+     note:"Participant voice. Validate before public use."},
 
-    // --- Explain who Envision is ---
-    {tag:"Who Envision is", who:[], goal:["about","internal"],
-     body:"Envision helps North Texans who are blind or have low vision build the skills, access the tools and find the support for life after vision loss."},
-    {tag:"What that looks like", who:[], goal:["about"],
-     body:"At Envision, that looks like employment, rehabilitation, education and community programs that help people who are blind or have low vision build independent lives across North Texas."},
-    {tag:"Legacy line (keep intact)", who:[], goal:["about"],
-     body:"Envision continues the mission of Dallas Lighthouse for the Blind in North Texas.",
-     note:"Use this sentence whole; do not shorten or rephrase it."},
-    {tag:"Mission framing", who:[], goal:["about","fundraise"],
-     body:"The Walk supports Envision’s work to improve quality of life and provide inspiration and opportunity through employment, outreach, rehabilitation, education and research."},
-    {tag:"Why the white cane", who:[], goal:["about","announce"],
-     body:"On White Cane Safety Day, we celebrate the independence the white cane represents. The white cane is a symbol of independence, not limitation — the Walk celebrates the freedom it represents."},
-    {tag:"Scale", who:[], goal:["about","fundraise"],
-     body:"Envision serves thousands of North Texans who are blind or have low vision locally each year."},
-
-    // --- PSAs (broadcast) ---
-    {tag:"Event PSA · :10", who:["media"], goal:["psa"],
+    // ===== Media & press =====
+    {tag:"PSA · :10 spot", who:["media"], goal:["psa"],
      body:"After vision loss, even a familiar walk can require a new approach. Walk with us for independence at the White Cane Day Walk on Saturday, October 17 at the Dallas Zoo. Register or start a team at whitecanedaywalk.com.",
-     note:"One ask in the voiceover: register. Sponsor recognition on the end card only."},
-    {tag:"Event PSA · :30", who:["media"], goal:["psa"],
-     body:"After vision loss, even a familiar walk can require a new approach. At Envision, we help North Texans who are blind or have low vision build skills, access tools and find support to keep moving forward. That’s why every step matters, walk with us for independence at the White Cane Day Walk on Saturday, October 17 at the Dallas Zoo. Register or start a team today at whitecanedaywalk.com."},
-    {tag:"Awareness PSA · :10", who:["media"], goal:["psa"],
-     body:"Vision loss can change ordinary moments, fast. Envision helps North Texans who are blind or have low vision build skills, tools and independence. envisiondallas.org"},
-    {tag:"Awareness PSA · :30", who:["media"], goal:["psa"],
-     body:"Vision loss can change ordinary moments, fast. Reading a form. Getting to work. Moving through a place you knew by heart. Envision helps North Texans who are blind or have low vision build the skills, access the tools and find the support for life after vision loss. In North Texas, Envision continues the mission of Dallas Lighthouse for the Blind, helping people move forward with confidence and independence. Envision. Learn more at envisiondallas.org.",
-     note:"End card: envisiondallas.org — Continuing the mission of Dallas Lighthouse for the Blind in North Texas."}
+     note:"Use exactly as written. One ask in the voiceover: register. Pronunciation: Envision (en-VIZH-un). Flight: July 3 through October 17."},
+    {tag:"PSA · :30 spot", who:["media"], goal:["psa"],
+     body:"After vision loss, even a familiar walk can require a new approach. At Envision, we help North Texans who are blind or low vision build skills, access tools and find support to keep moving forward. That's why every step matters. Walk with us for independence at the White Cane Day Walk on Saturday, October 17 at the Dallas Zoo. Every step helps support independence for people navigating life after vision loss. Register or start a team today at whitecanedaywalk.com.",
+     note:"End card for both spots: White Cane Day Walk · Sat, Oct. 17 · Dallas Zoo · whitecanedaywalk.com · sponsor logo · Envision logo. Sponsor recognition on the end card only."},
+    {tag:"Media boilerplate · for press use", who:["media"], goal:["about"],
+     body:"Envision works to improve quality of life and provide inspiration and opportunity for people who are blind or have low vision through employment, outreach, rehabilitation, education and research. The White Cane Day Walk brings the North Texas community together to celebrate independence, raise awareness and support Envision's work. Registration and details: whitecanedaywalk.com."},
+    {tag:"Media pitch email", who:["media"], goal:["announce"],
+     subject:"North Texas walks for independence Oct. 17", cta:"Reply to coordinate coverage or interviews",
+     body:"On Saturday, Oct. 17, the North Texas community gathers at the Dallas Zoo for the White Cane Day Walk with Envision. The white cane stands for mobility, confidence and self-direction, and the Walk invites the community to stand behind Envision's work for people who are blind or have low vision across North Texas. Walkers, families and teams will be available for interviews, along with Envision leadership."}
   ];
 
   var PALETTE = [
@@ -633,18 +718,19 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
 
   /* ---------- Message finder ---------- */
   function copyCard(item) {
-    var full = (item.head ? item.head + "\n\n" : "") + item.body +
-               (item.cta ? "\n\nCTA: " + item.cta : "");
+    var title = item.subject || item.head;
+    var full = (item.subject ? "Subject: " + item.subject + "\n\n" : (item.head ? item.head + "\n\n" : "")) +
+               item.body + (item.cta ? "\n\nCTA: " + item.cta : "");
     return '<article class="copycard">' +
       '<div class="bar" aria-hidden="true"><i class="g"></i><i class="b"></i></div>' +
       '<div class="body">' +
       '<span class="pv-t">' + esc(item.tag) + '</span>' +
-      (item.head ? '<h3>' + esc(item.head) + '</h3>' : '') +
+      (title ? '<h3>' + (item.subject ? '<span style="font-weight:500;color:var(--muted)">Subject: </span>' : '') + esc(title) + '</h3>' : '') +
       '<p class="text">' + esc(item.body) + '</p>' +
       (item.cta ? '<p class="cta-line">Call to action: <b>' + esc(item.cta) + '</b></p>' : '') +
       (item.note ? '<p class="note">' + esc(item.note) + '</p>' : '') +
       '<div class="acts"><button class="act" type="button" data-copy="' + esc(item.body) + '" data-copymsg="Copied — paste it anywhere">Copy text</button>' +
-      (item.head ? '<button class="act" type="button" data-copy="' + esc(full) + '" data-copymsg="Copied headline, body & CTA">Copy all</button>' : '') +
+      (title ? '<button class="act" type="button" data-copy="' + esc(full) + '" data-copymsg="Copied the whole block">Copy all</button>' : '') +
       '</div></div></article>';
   }
 

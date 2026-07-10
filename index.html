@@ -822,7 +822,8 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
     var FORMATS = [
       {id:"square", label:"Social post · 1080×1080", w:1080, h:1080},
       {id:"cover",  label:"Social cover · 1200×630", w:1200, h:630},
-      {id:"banner", label:"Email header · 1200×300", w:1200, h:300}
+      {id:"banner", label:"Email header · 1200×300", w:1200, h:300},
+      {id:"banner600", label:"Email header · 600×200", w:600, h:200}
     ];
     var STATEMENTS = [
       "I walk with Envision.",
@@ -982,26 +983,39 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         ctx.fillStyle = onGreen ? navy : "#003087"; ctx.fillRect(Math.round(W*.22),0,W-Math.round(W*.22),barH);
 
         var M = Math.round(W * .07);
-        var isBanner = f.id === "banner";
+        var isBanner = f.id === "banner" || f.id === "banner600";
 
-        // headline
-        var size = isBanner ? 54 : Math.round(W * .072);
-        var lines, font;
-        do {
+        // headline: shrink until the whole stack (headline + personal line +
+        // date + CTA) fits the canvas
+        var size = isBanner ? Math.max(26, Math.round(W * .05)) : Math.round(W * .072);
+        var lines, font, contentH;
+        while (true) {
           font = "800 " + size + "px Montserrat, sans-serif";
-          lines = wrap(st.head, font, W - M*2 - (isBanner && st.cta !== "None" ? 300 : 0));
-          size -= 4;
-        } while (lines.length * size * 1.16 > H * (isBanner ? .55 : .42) && size > 22);
-        size += 4;
+          var reserve = isBanner ? (st.logo ? Math.round(W*.22) : (st.cta !== "None" ? Math.round(W*.18) : 0)) : 0;
+          lines = wrap(st.head, font, W - M*2 - reserve);
+          var estCta = st.cta !== "None" ? Math.max(18, size * .42) * 2.1 * 1.55 : 0;
+          contentH = lines.length * size * 1.14 +
+            (st.custom ? Math.max(20, size * .46) * 1.75 : 0) +
+            Math.max(18, size * .38) * 1.7 + estCta;
+          var fits = isBanner ? (contentH <= H * .88) : (lines.length * size * 1.16 <= H * .42);
+          if (fits || size <= 16) break;
+          size -= 2;
+        }
         var lh = Math.round(size * 1.14);
         var blockH = lines.length * lh;
-        var dateSize = Math.max(20, Math.round(size * .38));
-        var customSize = Math.max(22, Math.round(size * .46));
+        var dateSize = Math.max(Math.min(20, Math.round(H*.09)), Math.round(size * .38));
+        var customSize = Math.max(Math.min(22, Math.round(H*.1)), Math.round(size * .46));
         var customH = st.custom ? Math.round(customSize * 1.75) : 0;
         var ctaH = st.cta !== "None" ? Math.round(size * .95) : 0;
 
+        // real CTA pill metrics so the stack never overlaps
+        var ctaSize = st.cta !== "None" ? Math.max(18, Math.round(size * .42)) : 0;
+        var pillH = st.cta !== "None" ? Math.round(ctaSize * 2.1) : 0;
+        var stackH = blockH + customH + Math.round(dateSize*1.7) +
+                     (pillH ? Math.round(pillH * .55) + pillH : Math.round(dateSize*.5));
+
         var y;
-        if (isBanner) y = Math.round(H/2 - (blockH + customH + dateSize*1.7)/2 + size*.9);
+        if (isBanner) y = Math.round(Math.max(barH + size, (H - stackH)/2 + size*.9));
         else y = Math.round(H - M - (st.cta!=="None" ? ctaH + size*.9 : size*.4) - dateSize*1.9 - customH - blockH + size*.9);
 
         ctx.font = font; ctx.fillStyle = inkMain; ctx.textBaseline = "alphabetic";
@@ -1025,13 +1039,12 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
 
         // CTA pill + url
         if (st.cta !== "None") {
-          var ctaSize = Math.max(20, Math.round(size * .42));
           ctx.font = "700 " + ctaSize + "px Montserrat, sans-serif";
           var label = st.cta.replace(/\.$/, "");
           var tw = ctx.measureText(label).width;
-          var ph = Math.round(ctaSize * 2.1), pw = Math.round(tw + ctaSize * 2.2);
-          var px = M, py = isBanner ? dateY + Math.round(ph*.45) : dateY + Math.round(ph*.55);
-          if (isBanner && py + ph > H - 16) py = H - ph - 16;
+          var ph = pillH, pw = Math.round(tw + ctaSize * 2.2);
+          var px = M, py = dateY + Math.round(ph * .55);
+          if (py + ph > H - 10) py = H - ph - 10;
           ctx.fillStyle = onGreen ? navy : green;
           ctx.beginPath();
           var r = ph/2;

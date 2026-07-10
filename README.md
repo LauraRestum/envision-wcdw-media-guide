@@ -2,16 +2,12 @@
 
 The **external-facing** companion to the internal [WCDW Asset Dashboard](https://github.com/LauraRestum/wcdw-asset-dashboard): a single page that gives media, sponsors, and community partners everything they need to talk about **Envision** and the **Celebrating Independence: White Cane Day Walk** (Dallas Zoo · Saturday, Oct 17, 2026 · 5:00–7:00 PM) — and to grab any asset in one click.
 
-Open [`index.html`](index.html) — it is the whole product:
+Open [`index.html`](index.html) — it is the whole product, styled and laid out like the internal **Campaign Studio** (same navy hero, split bar, tabs, cards, and shared light/dark theme). The hero carries the quick facts (date, time, venue, registration URL, live countdown), and four tabs hold the rest:
 
-| Section | What it gives partners |
+| Tab | What it gives partners |
 | --- | --- |
-| **Quick facts** | Date, time, venue, registration URL, live countdown. |
-| **Approved event messaging** | The primary message plus short/expanded/launch/final-push variants from the 2026 Messaging Guide, each with a copy button. |
-| **By audience** | Approved headline + body + CTA for eight audiences (media, sponsors, donors, families, returning walkers, …). |
-| **About Envision** | Org boilerplate, the Dallas Lighthouse for the Blind legacy line (keep intact), naming rules. |
-| **Say this, never that** | Language rules: *people who are blind or have low vision* (never "impaired"/BVI), no retired names, no pity framing, one CTA per asset, and the five pillars. |
-| **Brand basics** | Click-to-copy palette (Navy `#002855` → Terracotta `#DC4405`), Montserrat/sentence-case type rules, logo usage. |
+| **Talking points** | The primary message plus short/expanded/launch/final-push variants from the 2026 Messaging Guide with copy buttons; approved headline + body + CTA for eight audiences; and Envision boilerplate, including the Dallas Lighthouse for the Blind legacy line (keep intact) and naming rules. |
+| **Language & brand** | Say-this/never-that rules: *people who are blind or have low vision* (never "impaired"/BVI), no retired names, no pity framing, one CTA per asset; the five pillars; click-to-copy palette (Navy `#002855` → Terracotta `#DC4405`) and Montserrat/sentence-case type rules. |
 | **PSA scripts** | Ready-to-read :10 and :30 event + awareness spots. |
 | **Asset library** | Searchable, filterable gallery with lightbox preview and one-click download — logo, brand video, 14 press-resolution event photos, 5 social graphics, 5 email banners. |
 

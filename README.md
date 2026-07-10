@@ -7,7 +7,7 @@ Open [`index.html`](index.html) — it is the whole product, styled and laid out
 | Tab | What it gives partners |
 | --- | --- |
 | **Find your message** | A guided message finder: pick who you are (company/sponsor, team captain, community group, vision care partner, family, donor, walker, media) and what you're trying to do (get employees involved, start or grow a team, fundraise, spread the word, explain Envision, read a PSA) — only the approved copy that fits is shown, with copy buttons. |
-| **Mini studio** | Build your own on-brand graphic in the browser: pick a format (social post, social cover, email header), an approved headline, a brand-color or event-photo background, and one CTA — then download the PNG and copy a matching approved caption. No premade social graphics to manage; partners generate what they need. |
+| **Mini studio** | A personal promotion kit: pick who you are (sponsor, team captain, community group, vision care partner, family, donor, walker), add your name or organization, and build an "I'm walking"-style graphic (social post, social cover, or email header) with statements like *I walk with Envision* or *Proud sponsor of the White Cane Day Walk* — then download the PNG and copy a ready public statement and an attributable media quote with your name filled in. |
 | **Language & brand** | Five quick rephrases (instead-of → say), the five pillars, and the click-to-copy palette (Navy `#002855` → Terracotta `#DC4405`). |
 | **Asset library** | Searchable, filterable gallery with lightbox preview and one-click download — logo, brand video, 14 press-resolution event photos, 5 email banners. |
 

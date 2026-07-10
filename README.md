@@ -6,10 +6,10 @@ Open [`index.html`](index.html) — it is the whole product, styled and laid out
 
 | Tab | What it gives partners |
 | --- | --- |
-| **Talking points** | The primary message plus short/expanded/launch/final-push variants from the 2026 Messaging Guide with copy buttons; approved headline + body + CTA for eight audiences; and Envision boilerplate, including the Dallas Lighthouse for the Blind legacy line (keep intact) and naming rules. |
-| **Language & brand** | Say-this/never-that rules: *people who are blind or have low vision* (never "impaired"/BVI), no retired names, no pity framing, one CTA per asset; the five pillars; click-to-copy palette (Navy `#002855` → Terracotta `#DC4405`) and Montserrat/sentence-case type rules. |
-| **PSA scripts** | Ready-to-read :10 and :30 event + awareness spots. |
-| **Asset library** | Searchable, filterable gallery with lightbox preview and one-click download — logo, brand video, 14 press-resolution event photos, 5 social graphics, 5 email banners. |
+| **Find your message** | A guided message finder: pick who you are (company/sponsor, team captain, community group, vision care partner, family, donor, walker, media) and what you're trying to do (get employees involved, start or grow a team, fundraise, spread the word, explain Envision, read a PSA) — only the approved copy that fits is shown, with copy buttons. |
+| **Mini studio** | Build your own on-brand graphic in the browser: pick a format (social post, social cover, email header), an approved headline, a brand-color or event-photo background, and one CTA — then download the PNG and copy a matching approved caption. No premade social graphics to manage; partners generate what they need. |
+| **Language & brand** | Five quick rephrases (instead-of → say), the five pillars, and the click-to-copy palette (Navy `#002855` → Terracotta `#DC4405`). |
+| **Asset library** | Searchable, filterable gallery with lightbox preview and one-click download — logo, brand video, 14 press-resolution event photos, 5 email banners. |
 
 ## Running it locally
 
@@ -24,7 +24,7 @@ python3 -m http.server 8000   # then open http://localhost:8000/
 [`manifest.json`](manifest.json) is the single source of truth — a machine-readable index of every asset with path, category, description, and keyword tags (built for search tools and AI assistants too).
 
 - **Photos** in `assets/photos/` are exported at **press/web resolution (2400px long edge, JPEG q85)** from the internal dashboard's originals, keeping this repo light. Need the full-resolution original? It lives in the internal repo under `event-photos/`.
-- **Logos, social graphics, and email banners** are full production size.
+- **The logo and email banners** are full production size. Social graphics aren't stored here — partners build their own in the **Mini studio** tab from approved headlines, brand colors, and event photos.
 
 ### Adding or changing an asset
 
@@ -52,4 +52,3 @@ im.save("assets/photos/name.jpg", "JPEG", quality=85, optimize=True, progressive
 - Event photos contain **identifiable attendees** — use them in coverage or promotion of Envision and the White Cane Day Walk only, per Envision's photo-consent and privacy practices. Credit "Courtesy of Envision" where a credit is customary.
 - Refer to the audience as **people who are blind or have low vision** — never "visually impaired" or "BVI".
 - When an email banner goes in an email, **hyperlink the whole image to <https://whitecanedaywalk.com>**.
-- Post the 3-slide Instagram save-the-date carousel **in slide order**.

@@ -10,19 +10,17 @@
     "registration_url": "https://whitecanedaywalk.com",
     "organization_url": "https://envisiondallas.org"
   },
-  "description": "External-facing asset index for media, sponsors, and community partners covering or promoting the Envision White Cane Day Walk at the Dallas Zoo. Photos are provided at press/web resolution (2400px long edge); graphics and logos at full production size.",
+  "description": "External-facing asset index for media, sponsors, and community partners covering or promoting the Envision White Cane Day Walk at the Dallas Zoo. Photos are provided at press/web resolution (2400px long edge); the logo and email banners at full production size. Social graphics are built on demand in the guide's mini studio.",
   "usage_notes": [
     "Photos contain identifiable event attendees; use them in coverage or promotion of Envision and the White Cane Day Walk only, per Envision's photo-consent and privacy practices.",
     "Credit event photos 'Courtesy of Envision' where a credit is customary.",
     "Refer to the audience as 'people who are blind or have low vision' — never 'visually impaired' or 'BVI'.",
-    "When you place an email banner in an email, hyperlink the whole image to https://whitecanedaywalk.com so readers can click through to register.",
-    "Post the 3-slide Instagram save-the-date carousel in slide order."
+    "When you place an email banner in an email, hyperlink the whole image to https://whitecanedaywalk.com so readers can click through to register."
   ],
   "categories": {
     "logos": "The official White Cane Day Walk event logo.",
     "brand": "Brand imagery and the animated event logo video.",
     "photos": "Curated event photography at press/web resolution (2400px long edge).",
-    "social": "Ready-to-post social graphics: Facebook event cover and post, plus a 3-slide Instagram save-the-date carousel.",
     "email-banners": "Finished 1200×300 email header banners — hyperlink the image to whitecanedaywalk.com."
   },
   "assets": [
@@ -357,107 +355,6 @@
         "purple polo",
         "tortoise",
         "zoo keeper"
-      ]
-    },
-    {
-      "path": "assets/social/facebook-event-cover.jpg",
-      "filename": "facebook-event-cover.jpg",
-      "category": "social",
-      "type": "image",
-      "dimensions": "851x315",
-      "thumbnail": "guide/thumbnails/assets/social/facebook-event-cover.jpg",
-      "description": "Facebook event cover (851x315): the ‘Walk for Independence — White Cane Day Walk’ logo on a soft green background with navy zoo-animal silhouettes, the Saturday Oct. 17, 2026 Dallas Zoo 5–7 PM date and ‘Presented by Fifth Third’.",
-      "tags": [
-        "2026",
-        "Fifth Third",
-        "date and time",
-        "event cover",
-        "facebook",
-        "green",
-        "logo",
-        "social"
-      ]
-    },
-    {
-      "path": "assets/social/save-the-date-facebook-post.jpg",
-      "filename": "save-the-date-facebook-post.jpg",
-      "category": "social",
-      "type": "image",
-      "dimensions": "940x788",
-      "thumbnail": "guide/thumbnails/assets/social/save-the-date-facebook-post.jpg",
-      "description": "‘Independence is worth celebrating twice.’ Facebook save-the-date post: bold headline over a navy-tinted photo of two smiling participants (one with a white cane), with the White Cane Day Walk logo and the Saturday Oct. 17, 2026 Dallas Zoo date.",
-      "tags": [
-        "2026",
-        "facebook",
-        "navy",
-        "participants",
-        "photo",
-        "save the date",
-        "social",
-        "white cane"
-      ]
-    },
-    {
-      "path": "assets/social/save-the-date-instagram-1.jpg",
-      "filename": "save-the-date-instagram-1.jpg",
-      "category": "social",
-      "type": "image",
-      "dimensions": "1080x1350",
-      "thumbnail": "guide/thumbnails/assets/social/save-the-date-instagram-1.jpg",
-      "description": "Instagram save-the-date carousel, slide 1 of 3 (1080x1350): ‘Independence is worth celebrating twice.’ headline over a photo of two smiling walkers (one with a white cane), with a green swipe arrow.",
-      "tags": [
-        "2026",
-        "carousel",
-        "instagram",
-        "participants",
-        "save the date",
-        "slide 1",
-        "social",
-        "swipe arrow",
-        "white cane"
-      ]
-    },
-    {
-      "path": "assets/social/save-the-date-instagram-2.jpg",
-      "filename": "save-the-date-instagram-2.jpg",
-      "category": "social",
-      "type": "image",
-      "dimensions": "1080x1350",
-      "thumbnail": "guide/thumbnails/assets/social/save-the-date-instagram-2.jpg",
-      "description": "Instagram save-the-date carousel, slide 2 of 3 (1080x1350): ‘Today the country celebrates independence with fireworks. This fall, our community celebrates it with footsteps.’ over the crowd raising white canes behind the Celebrating Independence banner; ‘Save the date’ with a green swipe arrow.",
-      "tags": [
-        "2026",
-        "banner",
-        "carousel",
-        "crowd",
-        "fireworks",
-        "footsteps",
-        "instagram",
-        "save the date",
-        "slide 2",
-        "social",
-        "white canes raised"
-      ]
-    },
-    {
-      "path": "assets/social/save-the-date-instagram-3.jpg",
-      "filename": "save-the-date-instagram-3.jpg",
-      "category": "social",
-      "type": "image",
-      "dimensions": "1080x1350",
-      "thumbnail": "guide/thumbnails/assets/social/save-the-date-instagram-3.jpg",
-      "description": "Instagram save-the-date carousel, slide 3 of 3 (1080x1350): ‘Save the date’ closing card with the Walk for Independence — White Cane Day Walk logo and the Saturday Oct. 17, 2026 Dallas Zoo date, over a photo of a mother and daughter walking with a cane.",
-      "tags": [
-        "2026",
-        "Dallas Zoo",
-        "carousel",
-        "date",
-        "instagram",
-        "logo",
-        "save the date",
-        "slide 3",
-        "social",
-        "white cane"
       ]
     },
     {

@@ -151,6 +151,9 @@
   .gencontrols .mini-l{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:1rem 0 .5rem}
   .gencontrols .mini-l:first-child{margin-top:0}
   .gencontrols .filter-row{margin-bottom:.2rem}
+  .stinput{width:100%;border:1px solid var(--line);border-radius:8px;padding:.6rem .7rem;
+    font-family:inherit;font-size:.85rem;color:var(--ink);background:var(--card)}
+  .stinput:focus{outline:none;border-color:var(--green)}
   .stcheck{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;color:var(--ink);margin:1rem 0 .2rem;cursor:pointer}
   .stcheck input{width:16px;height:16px;accent-color:var(--green)}
   .stacts{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
@@ -344,14 +347,18 @@
   <!-- ================= Mini studio ================= -->
   <section class="panel" id="p-studio" role="tabpanel" aria-labelledby="t-studio" tabindex="0" hidden>
     <span class="eyebrow">Mini studio</span>
-    <h2 class="sec-title">Build your own graphic</h2>
-    <p class="sec-sub">Make an on-brand social post, email header, or cover image in seconds — approved headlines, brand colors, event photos, one call to action. Download the PNG and post it, or copy the matching caption to go with it.</p>
+    <h2 class="sec-title">Help promote the Walk — as yourself</h2>
+    <p class="sec-sub">Pick who you are and add your name or organization. You'll get a shareable graphic that says you're walking, plus a ready-to-post public statement and an attributable quote with your name filled in — everything you need to promote the Walk in your own voice.</p>
     <div class="gen">
       <div class="gencontrols">
+        <p class="mini-l">I am…</p>
+        <div class="filter-row" id="stVoice"></div>
+        <p class="mini-l">Your name, team or organization</p>
+        <input type="text" id="stCustom" class="stinput" maxlength="48" placeholder="e.g. Team Rivera, Acme Grocery, Lakewood Lions" aria-label="Your name, team or organization">
+        <p class="mini-l">The graphic says…</p>
+        <div class="filter-row" id="stHead"></div>
         <p class="mini-l">Format</p>
         <div class="filter-row" id="stFormat"></div>
-        <p class="mini-l">Headline (approved)</p>
-        <div class="filter-row" id="stHead"></div>
         <p class="mini-l">Background</p>
         <div class="filter-row" id="stBg"></div>
         <p class="mini-l">Call to action</p>
@@ -359,9 +366,10 @@
         <label class="stcheck"><input type="checkbox" id="stLogo" checked> Show the event logo</label>
         <div class="stacts">
           <button class="btn btn-green" id="stDownload" type="button">Download PNG</button>
-          <button class="btn btn-ghost" id="stCaption" type="button">Copy matching caption</button>
+          <button class="btn btn-ghost" id="stStatement" type="button">Copy public statement</button>
+          <button class="btn btn-ghost" id="stQuote" type="button">Copy quote for media</button>
         </div>
-        <p class="stnote">Everything here is preapproved — headlines and captions come from the FY27 Messaging Guide, colors and type from the brand palette. One call to action per asset.</p>
+        <p class="stnote" id="stNote">Statements and quotes come from the FY27 Messaging Guide with your name or organization filled in — leave [Name] and [Title] for the person being quoted. One call to action per asset.</p>
       </div>
       <div class="genstage">
         <canvas id="stCanvas" role="img" aria-label="Preview of your graphic"></canvas>
@@ -780,17 +788,40 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
       {id:"cover",  label:"Social cover · 1200×630", w:1200, h:630},
       {id:"banner", label:"Email header · 1200×300", w:1200, h:300}
     ];
-    var HEADLINES = [
-      "Walk with us for independence.",
+    var STATEMENTS = [
+      "I walk with Envision.",
+      "Walk with me for independence.",
       "Who do you walk for?",
-      "Start your team.",
-      "Every step counts.",
+      "Why I walk.",
       "Walk for someone you love.",
-      "North Texas walks for independence.",
-      "Vision can change. Independence does not have to.",
-      "Go the extra mile for independence."
+      "Walk with my team for independence.",
+      "Proud sponsor of the White Cane Day Walk.",
+      "Every step counts."
     ];
-    var CTAS = ["Register today.", "Start a team.", "Make a gift.", "Save your spot.", "None"];
+    var CTAS = ["Walk with me.", "Join my team.", "Register today.", "Make a gift.", "None"];
+    var VOICES = [
+      {id:"company", label:"Company / sponsor", ph:"[Company]", def:"Proud sponsor of the White Cane Day Walk.",
+       statement:"[Company] is a proud sponsor of the White Cane Day Walk with Envision. On Saturday, Oct. 17 at the Dallas Zoo, North Texas comes together to celebrate the independence the white cane represents. We are bringing a team. Walk with us.",
+       quote:"“[Company] is proud to walk with Envision at the White Cane Day Walk. Independence is worth investing in, and Envision's work for people who are blind or have low vision across North Texas, through employment, rehabilitation, education, outreach and research, is local impact we want our name beside.” [Name], [Title], [Company]"},
+      {id:"captain", label:"Team captain", def:"Walk with my team for independence.",
+       statement:"I'm captaining a team in the White Cane Day Walk with Envision on Saturday, Oct. 17 at the Dallas Zoo. The Walk celebrates the independence the white cane represents and supports Envision's work for people who are blind or have low vision across North Texas. Walk with me.",
+       quote:"“I came back this year to lead a team because the Walk is the easiest way to stand behind independence in our own community. Envision does the work all year. On Oct. 17, the rest of us get to walk with them.” [Name], team captain, White Cane Day Walk"},
+      {id:"group", label:"Community group", ph:"[Group name]", def:"Walk with my team for independence.",
+       statement:"[Group name] is joining Envision for the White Cane Day Walk on Saturday, Oct. 17 at the Dallas Zoo. The Walk supports Envision's work for people who are blind or have low vision across North Texas, and our members are invited to walk, start a team or give. Register at whitecanedaywalk.com.",
+       quote:"“Showing up for our neighbors is what this group is about. The White Cane Day Walk lets us do that in the most literal way possible: walking beside people who are blind or have low vision in support of their independence.” [Name], [Title], [Group name]"},
+      {id:"partner", label:"Vision care partner", ph:"[Practice name]", def:"Walk with me for independence.",
+       statement:"[Practice name] is proud to support the White Cane Day Walk with Envision. Envision connects people who are blind or have low vision across North Texas to employment, rehabilitation, education, outreach and research. We encourage our patients, families and staff to walk with us on Saturday, Oct. 17 at the Dallas Zoo.",
+       quote:"“As providers, we see how much changes after vision loss, and how much does not have to. Envision's services are where independence gets rebuilt, and the White Cane Day Walk is how our whole community gets behind that.” [Name], [Credentials], [Practice name]"},
+      {id:"family", label:"Family & friends", def:"Walk for someone you love.",
+       statement:"I'm walking in the White Cane Day Walk in honor of someone I love. The white cane stands for mobility, confidence and self-direction, and Envision's work across North Texas helps make that independence real. Join me Saturday, Oct. 17 at the Dallas Zoo.",
+       quote:"“I walk for my [relation]. Independence looks different after vision loss, but it is still independence, and Envision helps make sure of it. That is worth showing up for.” [Name], walker"},
+      {id:"donor", label:"Donor / supporter", def:"Every step counts.",
+       statement:"I support Envision because independence is worth investing in. Each year, Envision serves thousands of North Texans who are blind or have low vision through employment, outreach, rehabilitation, education and research. The White Cane Day Walk is the community's chance to stand behind that work. Join me on Oct. 17.",
+       quote:"“My gift goes to work right here in North Texas. Envision turns support into skills, jobs and independence for people who are blind or have low vision, and the Walk is where you can see that community in motion.” [Name], Envision supporter"},
+      {id:"walker", label:"Walker (blind or low vision)", def:"Why I walk.", guard:true,
+       statement:"My white cane stands for mobility, confidence and self-direction. I walk in the White Cane Day Walk to raise awareness and help the next person navigating vision loss connect to support. Walk with me on Saturday, Oct. 17 at the Dallas Zoo.",
+       quote:"“The cane is not the story. Independence is. I walk so more people in North Texas know that, and so the next person losing their vision knows where to find support.” [Name], walker"}
+    ];
     var BGS = [
       {id:"navy",     label:"Navy",        kind:"color", color:"#002855"},
       {id:"blue",     label:"Blue",        kind:"color", color:"#003087"},
@@ -801,9 +832,7 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
       {id:"ph3", label:"Photo · boardwalk",kind:"photo", src:"assets/photos/participants-walking-boardwalk.jpg"},
       {id:"ph4", label:"Photo · cane close-up", kind:"photo", src:"assets/photos/white-cane-closeup-sneaker-keychain.jpg"}
     ];
-    var CAPTION_BODY = "Walk with us for independence. Join Envision at the Dallas Zoo for the White Cane Day Walk, an evening of community, awareness and action supporting people who are blind or have low vision across North Texas.";
-
-    var st = { format:"square", head:HEADLINES[0], bg:"navy", cta:CTAS[0], logo:true };
+    var st = { format:"square", head:VOICES[0].def, bg:"navy", cta:CTAS[0], logo:true, custom:"", voice:VOICES[0].id };
     var canvas = $("#stCanvas");
     if (!canvas) return;
     var ctx = canvas.getContext("2d");
@@ -829,11 +858,28 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         draw();
       });
     }
+    chipRow($("#stVoice"), VOICES, "voice", function(v){return v.id;}, function(v){return v.label;});
     chipRow($("#stFormat"), FORMATS, "format", function(f){return f.id;}, function(f){return f.label;});
-    chipRow($("#stHead"), HEADLINES, "head", function(h){return h;}, function(h){return h;});
+    chipRow($("#stHead"), STATEMENTS, "head", function(h){return h;}, function(h){return h;});
     chipRow($("#stBg"), BGS, "bg", function(b){return b.id;}, function(b){return b.label;});
     chipRow($("#stCta"), CTAS, "cta", function(c){return c;}, function(c){return c;});
     $("#stLogo").addEventListener("change", function (e) { st.logo = e.target.checked; draw(); });
+    $("#stCustom").addEventListener("input", function (e) { st.custom = e.target.value.trim(); draw(); });
+
+    function voice(){ return VOICES.filter(function(v){ return v.id === st.voice; })[0]; }
+    // picking a voice pre-selects its natural graphic statement and updates the guardrail note
+    $("#stVoice").addEventListener("click", function (e) {
+      if (!e.target.closest(".chip")) return;
+      var v = voice();
+      st.head = v.def;
+      Array.prototype.forEach.call($("#stHead").children, function (c) {
+        c.setAttribute("aria-pressed", c.getAttribute("data-id") === st.head ? "true" : "false");
+      });
+      $("#stNote").textContent = v.guard
+        ? "Templates only: real participants speak for themselves. Validate every statement and quote with the participant before public use, and never publish a template as if it were a real person's words."
+        : "Statements and quotes come from the FY27 Messaging Guide with your name or organization filled in — leave [Name] and [Title] for the person being quoted. One call to action per asset.";
+      draw();
+    });
 
     function fmt(){ return FORMATS.filter(function(f){ return f.id === st.format; })[0]; }
     function bg(){ return BGS.filter(function(b){ return b.id === st.bg; })[0]; }
@@ -895,19 +941,31 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         var lh = Math.round(size * 1.14);
         var blockH = lines.length * lh;
         var dateSize = Math.max(20, Math.round(size * .38));
+        var customSize = Math.max(22, Math.round(size * .46));
+        var customH = st.custom ? Math.round(customSize * 1.75) : 0;
         var ctaH = st.cta !== "None" ? Math.round(size * .95) : 0;
 
         var y;
-        if (isBanner) y = Math.round(H/2 - (blockH + dateSize*1.7)/2 + size*.9);
-        else y = Math.round(H - M - (st.cta!=="None" ? ctaH + size*.9 : size*.4) - dateSize*1.9 - blockH + size*.9);
+        if (isBanner) y = Math.round(H/2 - (blockH + customH + dateSize*1.7)/2 + size*.9);
+        else y = Math.round(H - M - (st.cta!=="None" ? ctaH + size*.9 : size*.4) - dateSize*1.9 - customH - blockH + size*.9);
 
         ctx.font = font; ctx.fillStyle = inkMain; ctx.textBaseline = "alphabetic";
         lines.forEach(function (ln, i) { ctx.fillText(ln, M, y + i*lh); });
 
+        var cursorY = y + (lines.length-1)*lh;
+
+        // personal line (name, team or company)
+        if (st.custom) {
+          cursorY += Math.round(customSize * 1.75);
+          ctx.font = "700 " + customSize + "px Montserrat, sans-serif";
+          ctx.fillStyle = onGreen ? navy : gold;
+          ctx.fillText(st.custom, M, cursorY);
+        }
+
         // date line
         ctx.font = "600 " + dateSize + "px Montserrat, sans-serif";
         ctx.fillStyle = onGreen ? "rgba(0,40,85,.85)" : "rgba(255,255,255,.85)";
-        var dateY = y + (lines.length-1)*lh + Math.round(dateSize*1.7);
+        var dateY = cursorY + Math.round(dateSize*1.7);
         ctx.fillText("Saturday, Oct. 17 · 5–7 PM · Dallas Zoo", M, dateY);
 
         // CTA pill + url
@@ -970,9 +1028,21 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
       }, "image/png");
     });
-    $("#stCaption").addEventListener("click", function () {
-      var cap = st.head + " " + CAPTION_BODY + (st.cta !== "None" ? " " + st.cta.replace(/\.$/, "") + " at whitecanedaywalk.com." : " Register at whitecanedaywalk.com.");
-      copyText(cap, "Caption copied — paste it with your graphic");
+    function fillIn(text) {
+      var v = voice();
+      return (v.ph && st.custom) ? text.split(v.ph).join(st.custom) : text;
+    }
+    $("#stStatement").addEventListener("click", function () {
+      var v = voice();
+      copyText(fillIn(v.statement), v.guard
+        ? "Copied — validate with the participant before public use"
+        : "Public statement copied — post it with your graphic");
+    });
+    $("#stQuote").addEventListener("click", function () {
+      var v = voice();
+      copyText(fillIn(v.quote), v.guard
+        ? "Copied — participant-approved use only"
+        : "Quote copied — fill in [Name] and [Title]");
     });
 
     if (document.fonts && document.fonts.ready) {

@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WCDW Media &amp; Partner Guide — White Cane Day Walk 2026</title>
+<meta name="description" content="Everything media, sponsors, and community partners need to talk about Envision and the Celebrating Independence: White Cane Day Walk at the Dallas Zoo (Oct 17, 2026) — approved messaging, language rules, brand basics, and downloadable assets.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23002855'/%3E%3Cpath d='M9 22 L20 8' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='21' cy='7' r='2.5' fill='white'/%3E%3C/svg%3E">
+<style>
+  :root {
+    /* Surfaces & ink (light) */
+    --page:        #f9f9f7;
+    --surface:     #ffffff;
+    --surface-2:   #f4f4f1;
+    --ink:         #0b0b0b;
+    --ink-2:       #52514e;
+    --muted:       #6f6e69;
+    --hairline:    #e1e0d9;
+    --ring:        rgba(11,11,11,.10);
+    /* Brand accents (Envision blue/green) */
+    --accent:      #1c5cab;
+    --accent-ink:  #ffffff;
+    --accent-soft: #e8f0fb;
+    --aqua:        #0f8f63;
+    --focus:       #2a78d6;
+    --good:        #0f8f63;
+    --bad:         #c23b3b;
+    /* Category hues */
+    --c-logos:     #002855;
+    --c-brand:     #cf5a2c;
+    --c-photos:    #2a78d6;
+    --c-social:    #5a49c0;
+    --c-banners:   #cf3a3a;
+    --shadow:      0 1px 2px rgba(11,11,11,.06), 0 6px 20px rgba(11,11,11,.06);
+    --radius:      14px;
+  }
+  html[data-theme="dark"] {
+    --page:        #0d0d0d;
+    --surface:     #1a1a19;
+    --surface-2:   #232321;
+    --ink:         #ffffff;
+    --ink-2:       #c3c2b7;
+    --muted:       #9a988f;
+    --hairline:    #2c2c2a;
+    --ring:        rgba(255,255,255,.12);
+    --accent:      #3987e5;
+    --accent-ink:  #0b0b0b;
+    --accent-soft: #16273d;
+    --aqua:        #199e70;
+    --focus:       #5598e7;
+    --good:        #1baf7a;
+    --bad:         #e66767;
+    --c-logos:     #6f9fd8;
+    --c-brand:     #e0724a;
+    --c-photos:    #5598e7;
+    --c-social:    #9085e9;
+    --c-banners:   #e66767;
+    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  }
+  @media (prefers-color-scheme: dark) {
+    html[data-theme="auto"] {
+      --page:#0d0d0d;--surface:#1a1a19;--surface-2:#232321;--ink:#fff;--ink-2:#c3c2b7;
+      --muted:#9a988f;--hairline:#2c2c2a;--ring:rgba(255,255,255,.12);--accent:#3987e5;
+      --accent-ink:#0b0b0b;--accent-soft:#16273d;--aqua:#199e70;--focus:#5598e7;
+      --good:#1baf7a;--bad:#e66767;
+      --c-logos:#6f9fd8;--c-brand:#e0724a;--c-photos:#5598e7;--c-social:#9085e9;--c-banners:#e66767;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  .skip {
+    position: absolute; left: 12px; top: -60px;
+    background: var(--surface); color: var(--ink);
+    padding: 10px 16px; border-radius: 10px; z-index: 100;
+    box-shadow: var(--shadow); transition: top .15s;
+  }
+  .skip:focus { top: 12px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header.site {
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
+    position: sticky; top: 0; z-index: 40;
+  }
+  .site .wrap { display: flex; align-items: center; gap: 16px; padding: 12px 20px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .brand .mark {
+    flex: none; width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, #002855, var(--aqua));
+    display: grid; place-items: center; color: #fff; font-weight: 700;
+  }
+  .brand h1 { font-size: 17px; margin: 0; line-height: 1.2; letter-spacing: -.01em; }
+  .brand p { margin: 0; font-size: 12.5px; color: var(--muted); }
+  .site .spacer { flex: 1; }
+  nav.jump { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav.jump a {
+    text-decoration: none; color: var(--ink-2); font-size: 13px;
+    padding: 7px 11px; border-radius: 999px;
+  }
+  nav.jump a:hover { background: var(--surface-2); color: var(--ink); }
+  .iconbtn {
+    flex: none; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface-2); color: var(--ink); border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 13px; cursor: pointer;
+    text-decoration: none;
+  }
+  .iconbtn:hover { border-color: var(--accent); }
+
+  /* Hero */
+  .hero { padding: 34px 0 10px; }
+  .hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .hero h2 { margin: 0 0 8px; font-size: clamp(24px, 3.6vw, 34px); letter-spacing: -.02em; line-height: 1.15; }
+  .hero .lede { margin: 0 0 22px; color: var(--ink-2); max-width: 74ch; font-size: 16px; }
+  .facts { display: grid; gap: 14px; grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 960px){ .facts { grid-template-columns: repeat(2, 1fr); } }
+  .tile {
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow);
+  }
+  .tile .label { font-size: 12.5px; color: var(--muted); }
+  .tile .value { font-size: 21px; font-weight: 650; letter-spacing: -.01em; margin-top: 4px; line-height: 1.25; }
+  .tile .value a { text-decoration: none; }
+  .tile .value a:hover { text-decoration: underline; }
+  .tile.hero-tile { background: linear-gradient(150deg, #002855, #1c5cab); border: none; color: #fff; }
+  .tile.hero-tile .label { color: rgba(255,255,255,.85); }
+  .tile.hero-tile .value { color: #fff; font-size: 30px; }
+
+  /* Sections */
+  section.block { padding: 40px 0 8px; }
+  .sec-eyebrow {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 6px;
+  }
+  .sec-title { margin: 0 0 6px; font-size: 24px; letter-spacing: -.02em; }
+  .sec-sub { margin: 0 0 20px; color: var(--ink-2); max-width: 74ch; }
+
+  /* Copy cards */
+  .copygrid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .copycard {
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .copycard .tag {
+    align-self: flex-start; font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--accent);
+    background: var(--accent-soft); border-radius: 999px; padding: 4px 10px;
+  }
+  .copycard h3 { margin: 0; font-size: 16px; letter-spacing: -.01em; }
+  .copycard .text { margin: 0; color: var(--ink-2); font-size: 14px; flex: 1; white-space: pre-line; }
+  .copycard .cta-line { margin: 0; font-size: 13px; color: var(--muted); }
+  .copycard .cta-line b { color: var(--ink); }
+  .copycard .note { margin: 0; font-size: 12.5px; color: var(--muted); font-style: italic; }
+  .copyacts { display: flex; gap: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 13.5px;
+    padding: 9px 14px; border-radius: 10px; cursor: pointer; text-decoration: none;
+    border: 1px solid var(--hairline); background: var(--surface); color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(1.05); }
+
+  /* Language dos & don'ts */
+  .langgrid { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 800px){ .langgrid { grid-template-columns: 1fr; } }
+  .langcard {
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  .langcard h3 { margin: 0 0 12px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+  .langcard.say h3 { color: var(--good); }
+  .langcard.never h3 { color: var(--bad); }
+  .langcard ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+  .langcard li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; color: var(--ink-2); }
+  .langcard li b { color: var(--ink); font-weight: 600; }
+  .langcard li .mk { flex: none; font-weight: 700; }
+  .langcard.say .mk { color: var(--good); }
+  .langcard.never .mk { color: var(--bad); }
+  .pillars { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .pillars span {
+    background: var(--surface); border: 1px solid var(--hairline); color: var(--ink);
+    border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600;
+  }
+
+  /* Brand basics */
+  .brandgrid { display: grid; gap: 14px; grid-template-columns: 1.3fr 1fr; }
+  @media (max-width: 900px){ .brandgrid { grid-template-columns: 1fr; } }
+  .swatches { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .swatch {
+    border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; cursor: pointer;
+    background: var(--surface); padding: 0; font: inherit; text-align: left; box-shadow: var(--shadow);
+  }
+  .swatch .chipcolor { height: 56px; }
+  .swatch .meta { padding: 9px 12px; }
+  .swatch .meta b { display: block; font-size: 13px; }
+  .swatch .meta span { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .swatch:hover { border-color: var(--accent); }
+  .typecard ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 14px; }
+  .typecard li { margin: 5px 0; }
+
+  /* Controls (asset library) */
+  .controls { margin: 20px 0 8px; display: grid; gap: 14px; }
+  .searchrow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .search {
+    flex: 1 1 320px; display: flex; align-items: center; gap: 10px;
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 0 16px; min-height: 46px;
+  }
+  .search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .search svg { flex: none; color: var(--muted); }
+  .search input {
+    flex: 1; border: 0; background: transparent; color: var(--ink);
+    font: inherit; font-size: 15px; padding: 12px 0; min-width: 0;
+  }
+  .search input:focus { outline: none; }
+  .search .clear { border:0; background:transparent; color:var(--muted); cursor:pointer; font-size:20px; line-height:1; padding:6px; border-radius:8px; }
+  select.sort {
+    font: inherit; padding: 12px 14px; border-radius: 999px;
+    border: 1px solid var(--hairline); background: var(--surface); color: var(--ink);
+    min-height: 46px; cursor: pointer;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--hairline); color: var(--ink);
+    border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 13px; cursor: pointer;
+    transition: background .12s, border-color .12s;
+  }
+  .chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); flex: none; }
+  .chip .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .chip:hover { border-color: var(--accent); }
+  .chip[aria-pressed="true"] {
+    background: var(--accent); border-color: var(--accent); color: var(--accent-ink);
+  }
+  .chip[aria-pressed="true"] .n { color: var(--accent-ink); opacity: .85; }
+  .chip[aria-pressed="true"] .dot { background: currentColor; }
+
+  .resultbar { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 18px 0 12px; flex-wrap: wrap; }
+  .resultbar .count { color: var(--ink-2); font-size: 14px; }
+  .resultbar .count b { color: var(--ink); }
+
+  /* Gallery */
+  .grid {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    padding-bottom: 40px;
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+    display: flex; flex-direction: column;
+  }
+  .card .thumbbtn {
+    display: block; width: 100%; padding: 0; border: 0; cursor: pointer;
+    background: var(--surface-2); position: relative; aspect-ratio: 3 / 2; overflow: hidden;
+  }
+  .card .thumbbtn img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+  .card .thumbbtn.icon-fit img { object-fit: contain; padding: 22px; background: repeating-conic-gradient(var(--surface-2) 0% 25%, var(--surface) 0% 50%) 0 0 / 22px 22px; }
+  .card .thumbbtn:hover img { transform: scale(1.03); }
+  .badge-type {
+    position: absolute; left: 10px; top: 10px; display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(11,11,11,.72); color: #fff; border-radius: 999px;
+    padding: 5px 10px; font-size: 12px; font-weight: 600; letter-spacing: .02em; backdrop-filter: blur(4px);
+  }
+  .videoplay { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+  .videoplay span {
+    width: 58px; height: 58px; border-radius: 50%; background: rgba(11,11,11,.6);
+    display: grid; place-items: center; color: #fff;
+  }
+  .card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card .cat { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ink-2); font-weight: 600; }
+  .card .cat .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .card h3 { margin: 0; font-size: 14px; font-weight: 600; word-break: break-word; }
+  .card .desc {
+    margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 4px; }
+  .card .dims { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .miniacts { display: flex; gap: 6px; }
+  .miniacts button, .miniacts a {
+    display: inline-grid; place-items: center; width: 34px; height: 34px;
+    border-radius: 9px; border: 1px solid var(--hairline); background: var(--surface);
+    color: var(--ink-2); cursor: pointer; text-decoration: none;
+  }
+  .miniacts button:hover, .miniacts a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty h3 { color: var(--ink); margin: 0 0 6px; }
+
+  /* Lightbox */
+  dialog.lb {
+    padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100vh;
+    width: 100%; height: 100%; margin: 0;
+  }
+  dialog.lb::backdrop { background: rgba(6,6,6,.82); backdrop-filter: blur(3px); }
+  .lb-inner { display: grid; grid-template-columns: minmax(0,1fr) 340px; height: 100vh; }
+  @media (max-width: 880px){ .lb-inner { grid-template-columns: 1fr; grid-template-rows: 1fr auto; } }
+  .lb-stage { position: relative; display: grid; place-items: center; padding: 24px; min-height: 0; min-width: 0; }
+  .lb-stage img, .lb-stage video { max-width: 100%; max-height: calc(100vh - 48px); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+  .lb-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255,255,255,.14); color: #fff; display: grid; place-items: center;
+  }
+  .lb-nav:hover { background: rgba(255,255,255,.28); }
+  .lb-nav.prev { left: 14px; } .lb-nav.next { right: 14px; }
+  .lb-panel {
+    background: var(--surface); color: var(--ink); padding: 22px; overflow-y: auto;
+    border-left: 1px solid var(--hairline); display: flex; flex-direction: column; gap: 14px;
+  }
+  .lb-panel .cat { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+  .lb-panel .cat .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .lb-panel h2 { margin: 0; font-size: 18px; line-height: 1.3; word-break: break-word; }
+  .lb-panel .desc { margin: 0; color: var(--ink-2); font-size: 14px; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 13px; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; word-break: break-all; }
+  .taglist { display: flex; flex-wrap: wrap; gap: 6px; }
+  .taglist span { background: var(--surface-2); border: 1px solid var(--hairline); color: var(--ink-2); border-radius: 999px; padding: 4px 10px; font-size: 12px; }
+  .lb-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+  .lb-close {
+    position: fixed; top: 14px; right: 14px; z-index: 3; width: 42px; height: 42px; border-radius: 50%;
+    border: 0; background: rgba(255,255,255,.16); color: #fff; cursor: pointer; display: grid; place-items: center;
+  }
+  .lb-close:hover { background: rgba(255,255,255,.3); }
+  .lb-note { font-size: 12px; color: var(--muted); background: var(--surface-2); border-radius: 8px; padding: 10px 12px; border: 1px solid var(--hairline); }
+
+  footer.site { border-top: 1px solid var(--hairline); background: var(--surface); margin-top: 30px; }
+  footer.site .wrap { padding: 24px 20px 36px; color: var(--muted); font-size: 13px; }
+  footer.site a { color: var(--accent); }
+  footer.site p { margin: 0 0 8px; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--page); padding: 11px 18px; border-radius: 999px;
+    font-size: 13.5px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 90;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+    .card .thumbbtn img { transition: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#talk">Skip to talking points</a>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">WC</div>
+      <div>
+        <h1>WCDW Media &amp; Partner Guide</h1>
+        <p>Envision · White Cane Day Walk · Dallas Zoo 2026</p>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <nav class="jump" aria-label="Sections">
+      <a href="#talk">Talking points</a>
+      <a href="#envision">About Envision</a>
+      <a href="#language">Language</a>
+      <a href="#brand">Brand</a>
+      <a href="#psa">PSA scripts</a>
+      <a href="#assets">Assets</a>
+    </nav>
+    <button class="iconbtn" id="themeBtn" type="button" aria-pressed="false">
+      <span id="themeIcon" aria-hidden="true">◐</span><span id="themeLabel">Theme</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- ======================= Hero / quick facts ======================= -->
+  <section class="wrap hero" aria-labelledby="hero-h">
+    <span class="eyebrow">For media, sponsors &amp; community partners</span>
+    <h2 id="hero-h">Everything you need to talk about the Walk</h2>
+    <p class="lede">Approved messaging, language guidance, brand basics, and ready-to-use photos and graphics for the <strong>Celebrating Independence: White Cane Day Walk</strong> — all in one place. Every copy block below has a copy button; every asset downloads with one click.</p>
+    <div class="facts" role="group" aria-label="Event quick facts">
+      <div class="tile hero-tile">
+        <div class="label">Countdown</div>
+        <div class="value" id="countdown">Oct 17</div>
+      </div>
+      <div class="tile"><div class="label">When</div><div class="value">Sat, Oct 17, 2026</div></div>
+      <div class="tile"><div class="label">Time</div><div class="value">5:00–7:00 PM</div></div>
+      <div class="tile"><div class="label">Where</div><div class="value">Dallas Zoo</div></div>
+      <div class="tile"><div class="label">Register &amp; give</div><div class="value"><a href="https://whitecanedaywalk.com" target="_blank" rel="noopener">whitecanedaywalk.com</a></div></div>
+    </div>
+  </section>
+
+  <!-- ======================= Talking points ======================= -->
+  <section class="wrap block" id="talk" aria-labelledby="talk-h">
+    <p class="sec-eyebrow">How to talk about the Walk</p>
+    <h2 class="sec-title" id="talk-h">Approved event messaging</h2>
+    <p class="sec-sub">Use these blocks word for word — they come straight from the 2026 Messaging Guide. Pick the length that fits, keep <b>one primary call to action</b> per asset, and lead with independence, never the venue.</p>
+    <div class="copygrid" id="eventCopy"></div>
+
+    <h3 style="margin:28px 0 6px;font-size:18px">By audience</h3>
+    <p class="sec-sub">Talking to a specific group? Each angle pairs an approved headline, body, and call to action.</p>
+    <div class="copygrid" id="audienceCopy"></div>
+  </section>
+
+  <!-- ======================= About Envision ======================= -->
+  <section class="wrap block" id="envision" aria-labelledby="env-h">
+    <p class="sec-eyebrow">How to talk about Envision</p>
+    <h2 class="sec-title" id="env-h">The organization behind the Walk</h2>
+    <p class="sec-sub">Refer to the organization as <b>Envision</b>. For market context say <b>“Envision in North Texas”</b> or <b>“North Texans,”</b> and use <b>“Envision, Dallas Campus”</b> for the location — never “Envision Dallas” as the organization's name. The fundraising entity is <b>Envision's Dallas Foundation</b> (with the apostrophe).</p>
+    <div class="copygrid" id="orgCopy"></div>
+  </section>
+
+  <!-- ======================= Language ======================= -->
+  <section class="wrap block" id="language" aria-labelledby="lang-h">
+    <p class="sec-eyebrow">Language that respects the community</p>
+    <h2 class="sec-title" id="lang-h">Say this, never that</h2>
+    <p class="sec-sub">The Walk celebrates independence and agency. Keep the framing human-first, never clinical, and never pity- or deficit-based.</p>
+    <div class="langgrid">
+      <div class="langcard say">
+        <h3><span aria-hidden="true">✓</span> Say this</h3>
+        <ul>
+          <li><span class="mk" aria-hidden="true">✓</span><span><b>people who are blind or have low vision</b> — the only approved way to describe the community</span></li>
+          <li><span class="mk" aria-hidden="true">✓</span><span><b>Envision</b> as the organization; <b>“Envision in North Texas”</b> for market context</span></li>
+          <li><span class="mk" aria-hidden="true">✓</span><span><b>Envision, Dallas Campus</b> for the location</span></li>
+          <li><span class="mk" aria-hidden="true">✓</span><span><b>Envision's Dallas Foundation</b> — with the apostrophe</span></li>
+          <li><span class="mk" aria-hidden="true">✓</span><span><b>“operates across Wichita and the Dallas area”</b> when describing Envision's footprint</span></li>
+          <li><span class="mk" aria-hidden="true">✓</span><span>Lead with <b>independence and local impact</b>; center agency, skills, and community</span></li>
+          <li><span class="mk" aria-hidden="true">✓</span><span>One <b>primary call to action</b> per asset, with an action verb (“Register today,” “Start a team”)</span></li>
+          <li><span class="mk" aria-hidden="true">✓</span><span>Plain words: <b>use</b> (not “utilize”), <b>improve</b> (not “optimize”)</span></li>
+        </ul>
+      </div>
+      <div class="langcard never">
+        <h3><span aria-hidden="true">✕</span> Never this</h3>
+        <ul>
+          <li><span class="mk" aria-hidden="true">✕</span><span><b>“visually impaired,” “the blind,” or “BVI”</b> — retired; spell out the approved phrase instead</span></li>
+          <li><span class="mk" aria-hidden="true">✕</span><span><b>“Envision Dallas”</b> as the organization's name or market identity</span></li>
+          <li><span class="mk" aria-hidden="true">✕</span><span>Retired program names: <b>Envision Xpress, College Success Program, Talent Network</b></span></li>
+          <li><span class="mk" aria-hidden="true">✕</span><span>Making <b>the Zoo the headline</b> — it's the venue, not the story</span></li>
+          <li><span class="mk" aria-hidden="true">✕</span><span><b>Pity or deficit framing</b> (“suffers from,” “victim of,” “confined to”)</span></li>
+          <li><span class="mk" aria-hidden="true">✕</span><span><b>“Every dollar directly supports…”</b> unless specifically approved</span></li>
+          <li><span class="mk" aria-hidden="true">✕</span><span><b>“Click here”</b> as a link or button label</span></li>
+          <li><span class="mk" aria-hidden="true">✕</span><span><b>Em dashes</b> in campaign copy — use a comma instead</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pillars" role="group" aria-label="The five message pillars">
+      <span>🕊 Independence</span><span>📣 Awareness</span><span>🚪 Opportunity</span><span>🤝 Community</span><span>📍 Local impact</span>
+    </div>
+  </section>
+
+  <!-- ======================= Brand basics ======================= -->
+  <section class="wrap block" id="brand" aria-labelledby="brand-h">
+    <p class="sec-eyebrow">Brand basics</p>
+    <h2 class="sec-title" id="brand-h">Palette, type &amp; logo</h2>
+    <p class="sec-sub">Click any swatch to copy its hex value. The event logo (in the asset library below) goes on materials unmodified, at 100% opacity, with clear space around it.</p>
+    <div class="brandgrid">
+      <div>
+        <div class="swatches" id="swatches" role="group" aria-label="Brand colors — click to copy hex"></div>
+      </div>
+      <div class="langcard typecard">
+        <h3 style="color:var(--ink)">Typography &amp; style</h3>
+        <ul>
+          <li><b>Montserrat</b> is the campaign typeface; <b>ExtraBold</b> for headlines.</li>
+          <li>Headlines and buttons are written in <b>sentence case</b> — never all caps, never Title Case.</li>
+          <li>High contrast, legible type on every graphic; caption all video.</li>
+          <li>In an email, hyperlink header banners to <a href="https://whitecanedaywalk.com" target="_blank" rel="noopener">whitecanedaywalk.com</a> so the whole image clicks through to registration.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PSA scripts ======================= -->
+  <section class="wrap block" id="psa" aria-labelledby="psa-h">
+    <p class="sec-eyebrow">For broadcast &amp; radio</p>
+    <h2 class="sec-title" id="psa-h">Ready-to-read PSA scripts</h2>
+    <p class="sec-sub">Approved :10 and :30 spots. One ask in the voiceover — register. Sponsor recognition belongs on the end card only. Keep the voice warm, calm, grounded, and hopeful — human first, not clinical.</p>
+    <div class="copygrid" id="psaCopy"></div>
+  </section>
+
+  <!-- ======================= Asset library ======================= -->
+  <section class="wrap block" id="assets" aria-labelledby="assets-h">
+    <p class="sec-eyebrow">Asset library</p>
+    <h2 class="sec-title" id="assets-h">Photos, logos &amp; graphics — ready to download</h2>
+    <p class="sec-sub">Event photography at press/web resolution (2400px long edge), the official logo, ready-to-post social graphics, and finished email banners. Search by keyword or description, click any asset to preview it full size, and download with one click.</p>
+    <div class="facts" id="stats" role="group" aria-label="Library summary" style="grid-template-columns:repeat(5,1fr)"></div>
+  </section>
+
+  <section class="wrap controls" aria-label="Filter assets">
+    <div class="searchrow">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <label class="sr-only" for="q">Search assets by keyword, description, or file name</label>
+        <input id="q" type="search" placeholder="Search “giraffe”, “logo”, “banner”, “carousel”…" autocomplete="off">
+        <button class="clear" id="clearQ" type="button" aria-label="Clear search" hidden>×</button>
+      </div>
+      <label class="sr-only" for="sort">Sort assets</label>
+      <select class="sort" id="sort">
+        <option value="group">Sort: by collection</option>
+        <option value="az">Sort: file name A–Z</option>
+        <option value="res">Sort: largest first</option>
+      </select>
+    </div>
+    <div class="chips" id="cats" role="group" aria-label="Filter by collection"></div>
+  </section>
+
+  <div class="wrap resultbar">
+    <p class="count" id="count" aria-live="polite" role="status"></p>
+  </div>
+
+  <div class="wrap">
+    <div class="grid" id="gallery"></div>
+    <div class="empty" id="empty" hidden>
+      <h3>No assets match your filters</h3>
+      <p>Try a different keyword or choose “All collections”.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong style="color:var(--ink)">Photo use:</strong> event photos contain identifiable attendees. Use them in coverage or promotion of Envision and the White Cane Day Walk only, per Envision's photo-consent and privacy practices. Credit “Courtesy of Envision” where a credit is customary.</p>
+    <p><strong style="color:var(--ink)">Questions or higher-resolution files?</strong> Reach the team through <a href="https://envisiondallas.org" target="_blank" rel="noopener">envisiondallas.org</a> · Event registration and giving: <a href="https://whitecanedaywalk.com" target="_blank" rel="noopener">whitecanedaywalk.com</a></p>
+    <p>This guide is generated from <a href="manifest.json">manifest.json</a> — run <code>python3 guide/build.py</code> after adding assets. Built on the 2026 Messaging Guide.</p>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Asset preview">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close preview">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="lb-inner">
+    <div class="lb-stage" id="lbStage">
+      <button class="lb-nav prev" id="lbPrev" type="button" aria-label="Previous asset">‹</button>
+      <div id="lbMedia"></div>
+      <button class="lb-nav next" id="lbNext" type="button" aria-label="Next asset">›</button>
+    </div>
+    <aside class="lb-panel" id="lbPanel" aria-live="polite"></aside>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="guide/data.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = function (s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c];
+    });
+  };
+
+  /* ---------- Countdown ---------- */
+  (function () {
+    var el = $("#countdown"); if (!el) return;
+    var walk = new Date("2026-10-17T17:00:00");
+    var days = Math.ceil((walk - new Date()) / 864e5);
+    if (days > 1) el.innerHTML = days + ' <span style="font-size:15px;font-weight:500">days out</span>';
+    else if (days === 1) el.innerHTML = '1 <span style="font-size:15px;font-weight:500">day out</span>';
+    else if (days === 0) el.textContent = "Walk day!";
+    else el.textContent = "Thank you!";
+  })();
+
+  /* ---------- Copy-to-clipboard + toast ---------- */
+  var toastEl = $("#toast"), toastT;
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.classList.add("show");
+    clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove("show"); }, 1800);
+  }
+  function legacyCopy(t) {
+    var el = document.createElement("textarea"); el.value = t;
+    el.style.position = "fixed"; el.style.opacity = "0"; document.body.appendChild(el);
+    el.select(); try { document.execCommand("copy"); } catch (e) {} document.body.removeChild(el);
+  }
+  function copyText(t, msg) {
+    var done = function(){ toast(msg || "Copied to clipboard"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done, function(){ legacyCopy(t); done(); });
+    } else { legacyCopy(t); done(); }
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-copy]");
+    if (b) copyText(b.getAttribute("data-copy"), b.getAttribute("data-copymsg") || "Copied to clipboard");
+  });
+
+  /* ---------- Approved copy (2026 Messaging Guide) ---------- */
+  var EVENT_COPY = [
+    {tag:"Primary message", text:"The White Cane Day Walk brings the North Texas community together to celebrate independence, raise awareness and support Envision’s work for people who are blind or have low vision."},
+    {tag:"Short version", text:"Walk with us for independence. Join Envision at the Dallas Zoo for the White Cane Day Walk, an evening of community, awareness and action supporting people who are blind or have low vision across North Texas."},
+    {tag:"Expanded", text:"Join Envision Saturday, October 17, at the Dallas Zoo for an evening of community, awareness and action in support of people who are blind or have low vision across North Texas. The White Cane Day Walk celebrates the independence represented by the white cane while supporting Envision’s work to improve quality of life and provide inspiration and opportunity through employment, outreach, rehabilitation, education and research."},
+    {tag:"Announcement / launch", text:"Walk with us for independence. The White Cane Day Walk returns Saturday, Oct. 17 at the Dallas Zoo. Join Envision for an evening of community, awareness and action supporting people who are blind or have low vision across North Texas. Register, start a team or make a gift today."},
+    {tag:"Funds-raised line", text:"Funds raised support Envision’s work for people who are blind or have low vision across North Texas."},
+    {tag:"Final push", text:"The White Cane Day Walk is almost here. Register, donate or start a team today and help support Envision’s work across North Texas."}
+  ];
+
+  var AUDIENCES = [
+    {name:"General / community", head:"Walk with us for independence.", cta:"Register at whitecanedaywalk.com",
+     body:"Join Envision for the White Cane Day Walk, Saturday, Oct. 17 at the Dallas Zoo. Register, start a team or make a gift to support Envision’s work for people who are blind or have low vision across North Texas."},
+    {name:"Media / public awareness", head:"Walk with us for independence.", cta:"Register",
+     body:"The White Cane Day Walk brings the North Texas community together to celebrate independence, raise awareness and support Envision’s work for people who are blind or have low vision."},
+    {name:"Corporate partners / sponsors", head:"Assemble your team. Walk with us.", cta:"Sponsor, start a company team or share",
+     body:"Bring your team and show North Texas what inclusion looks like in motion. Join Envision and help support local programs and services."},
+    {name:"Individual donors", head:"Independence is worth investing in.", cta:"Give or register to walk",
+     body:"Envision serves thousands of North Texans who are blind or have low vision locally each year. Your gift through the Walk helps build independence across North Texas."},
+    {name:"Vision care & referral partners", head:"Help more North Texans connect to support.", cta:"Partner with us, start a team or share the Walk",
+     body:"Partner with Envision for the White Cane Day Walk. Sponsor, start a team, recruit staff or share the Walk with your patients and networks to connect more North Texans to support, services and independence."},
+    {name:"Family, loved ones & champions", head:"Walk for someone you love.", cta:"Walk in honor of someone, start a team",
+     body:"Walk, fundraise or start a team in honor of someone you love. Invite friends and family to join you and help support independence across North Texas."},
+    {name:"Returning walkers", head:"You walked. Now lead the way.", cta:"Start a team",
+     body:"You walked with us before. This year, bring others with you. Start a team and help support independence across North Texas."},
+    {name:"Walkers who are blind or have low vision", head:"Why I walk.", cta:"Walk with me / share your reason",
+     body:"I walk to raise awareness and help others connect to support, for me, my community and the next person navigating vision loss.",
+     note:"Validate language with participants before public use."}
+  ];
+
+  var ORG_COPY = [
+    {tag:"Who Envision is", text:"Envision helps North Texans who are blind or have low vision build the skills, access the tools and find the support for life after vision loss."},
+    {tag:"What that looks like", text:"At Envision, that looks like employment, rehabilitation, education and community programs that help people who are blind or have low vision build independent lives across North Texas."},
+    {tag:"Legacy line (keep intact)", text:"Envision continues the mission of Dallas Lighthouse for the Blind in North Texas.",
+     note:"Use this sentence whole; do not shorten or rephrase it."},
+    {tag:"Mission framing", text:"The Walk supports Envision’s work to improve quality of life and provide inspiration and opportunity through employment, outreach, rehabilitation, education and research."},
+    {tag:"Why the white cane", text:"On White Cane Safety Day, we celebrate the independence the white cane represents. The white cane is a symbol of independence, not limitation — the Walk celebrates the freedom it represents."},
+    {tag:"Scale", text:"Envision serves thousands of North Texans who are blind or have low vision locally each year."}
+  ];
+
+  var PSA_COPY = [
+    {tag:"Event PSA · :10", text:"After vision loss, even a familiar walk can require a new approach. Walk with us for independence at the White Cane Day Walk on Saturday, October 17 at the Dallas Zoo. Register or start a team at whitecanedaywalk.com."},
+    {tag:"Event PSA · :30", text:"After vision loss, even a familiar walk can require a new approach. At Envision, we help North Texans who are blind or have low vision build skills, access tools and find support to keep moving forward. That’s why every step matters, walk with us for independence at the White Cane Day Walk on Saturday, October 17 at the Dallas Zoo. Register or start a team today at whitecanedaywalk.com."},
+    {tag:"Awareness PSA · :10", text:"Vision loss can change ordinary moments, fast. Envision helps North Texans who are blind or have low vision build skills, tools and independence. envisiondallas.org"},
+    {tag:"Awareness PSA · :30", text:"Vision loss can change ordinary moments, fast. Reading a form. Getting to work. Moving through a place you knew by heart. Envision helps North Texans who are blind or have low vision build the skills, access the tools and find the support for life after vision loss. In North Texas, Envision continues the mission of Dallas Lighthouse for the Blind, helping people move forward with confidence and independence. Envision. Learn more at envisiondallas.org.",
+     note:"End card: envisiondallas.org — Continuing the mission of Dallas Lighthouse for the Blind in North Texas."}
+  ];
+
+  var PALETTE = [
+    {name:"Navy", hex:"#002855"}, {name:"Blue", hex:"#003087"},
+    {name:"Bright blue", hex:"#41B6E6"}, {name:"Green", hex:"#78BE21"},
+    {name:"Goldenrod", hex:"#FFCF00"}, {name:"Terracotta", hex:"#DC4405"}
+  ];
+
+  /* ---------- Render copy sections ---------- */
+  function copyCard(item, headline) {
+    var full = (headline && item.head ? item.head + "\n\n" : "") + item.text +
+               (item.cta ? "\n\nCTA: " + item.cta : "");
+    return '<article class="copycard">' +
+      '<span class="tag">' + esc(item.tag || item.name) + '</span>' +
+      (item.head ? '<h3>' + esc(item.head) + '</h3>' : '') +
+      '<p class="text">' + esc(item.body || item.text) + '</p>' +
+      (item.cta ? '<p class="cta-line">Call to action: <b>' + esc(item.cta) + '</b></p>' : '') +
+      (item.note ? '<p class="note">' + esc(item.note) + '</p>' : '') +
+      '<div class="copyacts"><button class="btn primary" type="button" data-copy="' + esc(item.body || item.text) + '" data-copymsg="Copied — paste it anywhere">Copy text</button>' +
+      (item.head ? '<button class="btn" type="button" data-copy="' + esc(full) + '" data-copymsg="Copied headline, body & CTA">Copy all</button>' : '') +
+      '</div></article>';
+  }
+  $("#eventCopy").innerHTML = EVENT_COPY.map(function (c) { return copyCard(c); }).join("");
+  $("#audienceCopy").innerHTML = AUDIENCES.map(function (a) {
+    return copyCard({tag:a.name, head:a.head, body:a.body, text:a.body, cta:a.cta, note:a.note}, true);
+  }).join("");
+  $("#orgCopy").innerHTML = ORG_COPY.map(function (c) { return copyCard(c); }).join("");
+  $("#psaCopy").innerHTML = PSA_COPY.map(function (c) { return copyCard(c); }).join("");
+
+  /* ---------- Palette swatches ---------- */
+  $("#swatches").innerHTML = PALETTE.map(function (p) {
+    return '<button class="swatch" type="button" data-copy="' + p.hex + '" data-copymsg="Copied ' + p.hex + '">' +
+      '<span class="chipcolor" style="display:block;background:' + p.hex + '"></span>' +
+      '<span class="meta"><b>' + esc(p.name) + '</b><span>' + p.hex + '</span></span></button>';
+  }).join("");
+
+  /* ---------- Asset library ---------- */
+  var CAT_META = {
+    "logos":         { label: "Logo",           color: "var(--c-logos)" },
+    "brand":         { label: "Brand",          color: "var(--c-brand)" },
+    "photos":        { label: "Event photos",   color: "var(--c-photos)" },
+    "social":        { label: "Social",         color: "var(--c-social)" },
+    "email-banners": { label: "Email banners",  color: "var(--c-banners)" }
+  };
+  function catLabel(c){ return (CAT_META[c] && CAT_META[c].label) || c; }
+  function catColor(c){ return (CAT_META[c] && CAT_META[c].color) || "var(--muted)"; }
+  function area(dim){ if(!dim) return 0; var p=String(dim).split("x"); return (+p[0]||0)*(+p[1]||0); }
+
+  function boot(data) {
+    if (!data || !data.assets) { fatal(); return; }
+    var ASSETS = data.assets.slice();
+    var state = { q: "", cat: "all", sort: "group" };
+
+    // Stats
+    var total = ASSETS.length;
+    function countCat(c){ return ASSETS.filter(function(a){ return a.category === c; }).length; }
+    var statsHtml =
+      tile("Total assets", total, true) +
+      tile("Event photos", countCat("photos")) +
+      tile("Social graphics", countCat("social")) +
+      tile("Email banners", countCat("email-banners")) +
+      tile("Logo & brand", countCat("logos") + countCat("brand"));
+    $("#stats").innerHTML = statsHtml;
+    function tile(label, value, hero){
+      return '<div class="tile'+(hero?' hero-tile':'')+'">' +
+        '<div class="label">'+esc(label)+'</div>' +
+        '<div class="value" style="font-size:30px">'+value+'</div></div>';
+    }
+
+    // Category chips
+    var counts = ASSETS.reduce(function (m, a) { m[a.category] = (m[a.category]||0)+1; return m; }, {});
+    var order = Object.keys(CAT_META).filter(function(c){ return counts[c]; });
+    Object.keys(counts).forEach(function(c){ if (order.indexOf(c)===-1) order.push(c); });
+    var chips = ['<button class="chip" data-cat="all" aria-pressed="true">' +
+      '<span class="dot" style="background:var(--ink-2)"></span>All collections <span class="n">'+total+'</span></button>'];
+    order.forEach(function (c) {
+      chips.push('<button class="chip" data-cat="'+esc(c)+'" aria-pressed="false">' +
+        '<span class="dot" style="background:'+catColor(c)+'"></span>'+esc(catLabel(c))+
+        ' <span class="n">'+counts[c]+'</span></button>');
+    });
+    $("#cats").innerHTML = chips.join("");
+    $("#cats").addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      state.cat = b.getAttribute("data-cat");
+      Array.prototype.forEach.call($("#cats").children, function (el) {
+        el.setAttribute("aria-pressed", el === b ? "true" : "false");
+      });
+      render();
+    });
+
+    // Search + sort
+    var qEl = $("#q"), clearBtn = $("#clearQ");
+    qEl.addEventListener("input", function () {
+      state.q = qEl.value.trim().toLowerCase();
+      clearBtn.hidden = !qEl.value;
+      render();
+    });
+    clearBtn.addEventListener("click", function () {
+      qEl.value = ""; state.q = ""; clearBtn.hidden = true; qEl.focus(); render();
+    });
+    $("#sort").addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+
+    // Filtering
+    var current = [];
+    function matches(a) {
+      if (state.cat !== "all" && a.category !== state.cat) return false;
+      if (!state.q) return true;
+      var hay = [a.filename, a.path, a.description, catLabel(a.category)]
+        .concat(a.tags || []).join(" ").toLowerCase();
+      return state.q.split(/\s+/).every(function (t) { return hay.indexOf(t) !== -1; });
+    }
+    function sortList(list) {
+      var s = state.sort;
+      if (s === "az") return list.sort(function(a,b){ return a.filename.localeCompare(b.filename); });
+      if (s === "res") return list.sort(function(a,b){ return area(b.dimensions)-area(a.dimensions); });
+      return list.sort(function (a, b) {
+        var d = order.indexOf(a.category) - order.indexOf(b.category);
+        return d !== 0 ? d : a.filename.localeCompare(b.filename);
+      });
+    }
+
+    var gallery = $("#gallery"), emptyEl = $("#empty"), countEl = $("#count");
+    function render() {
+      current = sortList(ASSETS.filter(matches));
+      countEl.innerHTML = "Showing <b>" + current.length + "</b> of " + total + " assets" +
+        (state.cat !== "all" ? " in " + esc(catLabel(state.cat)) : "") +
+        (state.q ? ' for “' + esc(state.q) + '”' : "");
+      emptyEl.hidden = current.length !== 0;
+      gallery.innerHTML = current.map(cardHtml).join("");
+    }
+
+    function typeBadge(a) {
+      if (a.type === "video") return '<span class="badge-type">▶ Video</span>';
+      return '<span class="badge-type">' + (a.category === "photos" ? "Photo" : "Graphic") + '</span>';
+    }
+    function cardHtml(a, i) {
+      var isLogo = a.category === "logos";
+      var media;
+      if (a.thumbnail) {
+        media = '<img src="'+esc(a.thumbnail)+'" alt="'+esc(a.description || a.filename)+'" loading="lazy">';
+      } else if (a.type === "video") {
+        media = '<div style="position:absolute;inset:0;background:linear-gradient(135deg,#002855,var(--aqua))"></div>';
+      } else {
+        media = '<div style="position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:34px">🖼</div>';
+      }
+      return '<article class="card">' +
+        '<button class="thumbbtn'+(isLogo?' icon-fit':'')+'" type="button" data-i="'+i+'" ' +
+          'aria-label="Preview '+esc(a.filename)+'">' +
+          media + typeBadge(a) +
+          (a.type === "video" ? '<span class="videoplay"><span>▶</span></span>' : '') +
+        '</button>' +
+        '<div class="body">' +
+          '<span class="cat"><span class="dot" style="background:'+catColor(a.category)+'"></span>'+esc(catLabel(a.category))+'</span>' +
+          '<h3>'+esc(a.filename)+'</h3>' +
+          '<p class="desc">'+esc(a.description || "")+'</p>' +
+          '<div class="foot">' +
+            '<span class="dims">'+esc(a.dimensions || (a.type||"").toUpperCase())+'</span>' +
+            '<div class="miniacts">' +
+              '<a href="'+esc(a.path)+'" download title="Download" aria-label="Download '+esc(a.filename)+'">' +
+                '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg></a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }
+
+    gallery.addEventListener("click", function (e) {
+      var thumb = e.target.closest(".thumbbtn");
+      if (thumb) { openLb(+thumb.getAttribute("data-i")); }
+    });
+
+    // Lightbox
+    var lb = $("#lb"), lbMedia = $("#lbMedia"), lbPanel = $("#lbPanel");
+    var lbIndex = -1, lastFocus = null;
+    function openLb(i) {
+      if (i < 0 || i >= current.length) return;
+      lbIndex = i; lastFocus = document.activeElement;
+      paintLb();
+      if (!lb.open) lb.showModal();
+    }
+    function paintLb() {
+      var a = current[lbIndex];
+      var m;
+      if (a.type === "image") {
+        m = '<img src="'+esc(a.path)+'" alt="'+esc(a.description || a.filename)+'">';
+      } else if (a.type === "video") {
+        m = '<video src="'+esc(a.path)+'" controls autoplay playsinline ' +
+            (a.thumbnail?('poster="'+esc(a.thumbnail)+'"'):'')+'>Your browser cannot play this video. ' +
+            '<a href="'+esc(a.path)+'">Download it instead.</a></video>';
+      } else {
+        m = '<a class="btn" href="'+esc(a.path)+'">Open file</a>';
+      }
+      lbMedia.innerHTML = m;
+
+      var tags = (a.tags || []).map(function (t) { return '<span>'+esc(t)+'</span>'; }).join("");
+      var kv = '';
+      kv += a.dimensions ? row("Dimensions", a.dimensions) : '';
+      kv += a.duration_seconds ? row("Duration", a.duration_seconds + " s") : '';
+      kv += row("Type", (a.type||"").toUpperCase());
+      kv += row("File", a.filename);
+      function row(k, v){ return '<dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd>'; }
+
+      var note = a.category === "photos"
+        ? '<p class="lb-note">Press/web resolution (2400px long edge). Photos contain identifiable attendees — use in coverage or promotion of Envision and the Walk only. Credit “Courtesy of Envision”.</p>'
+        : (a.category === "email-banners"
+          ? '<p class="lb-note">When you place this banner in an email, hyperlink the whole image to <b>whitecanedaywalk.com</b> so readers click through to registration.</p>'
+          : '');
+
+      lbPanel.innerHTML =
+        '<span class="cat"><span class="dot" style="background:'+catColor(a.category)+'"></span>'+esc(catLabel(a.category))+'</span>' +
+        '<h2>'+esc(a.filename)+'</h2>' +
+        '<p class="desc">'+esc(a.description || "")+'</p>' +
+        (kv ? '<dl class="kv">'+kv+'</dl>' : '') +
+        (tags ? '<div class="taglist">'+tags+'</div>' : '') +
+        note +
+        '<div class="lb-actions">' +
+          '<a class="btn primary" href="'+esc(a.path)+'" download>Download</a>' +
+          '<a class="btn" href="'+esc(a.path)+'" target="_blank" rel="noopener">Open in new tab</a>' +
+        '</div>' +
+        '<p class="lb-note" style="background:transparent;border:0;padding:0">Asset '+(lbIndex+1)+' of '+current.length+'</p>';
+
+      $("#lbClose").focus();
+    }
+    function step(d) {
+      var n = current.length; if (!n) return;
+      lbIndex = (lbIndex + d + n) % n; paintLb();
+    }
+    $("#lbPrev").addEventListener("click", function () { step(-1); });
+    $("#lbNext").addEventListener("click", function () { step(1); });
+    $("#lbClose").addEventListener("click", function () { lb.close(); });
+    lb.addEventListener("click", function (e) {
+      if (e.target === lb || e.target.id === "lbStage") lb.close();
+    });
+    lb.addEventListener("close", function () {
+      lbMedia.innerHTML = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!lb.open) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+    });
+
+    render();
+  }
+
+  function fatal() {
+    document.getElementById("gallery").innerHTML =
+      '<div class="empty"><h3>Could not load the asset index</h3>' +
+      '<p>Run <code>python3 guide/build.py</code>, then serve the folder ' +
+      '(<code>python3 -m http.server</code>) or open it via GitHub Pages.</p></div>';
+  }
+
+  /* ---------- Theme toggle (shared key with the internal tools) ---------- */
+  (function () {
+    var root = document.documentElement, btn = $("#themeBtn");
+    var icon = $("#themeIcon"), label = $("#themeLabel");
+    var saved = null;
+    try { saved = localStorage.getItem("wcdw-theme"); } catch (e) {}
+    if (saved) root.setAttribute("data-theme", saved);
+    function sync() {
+      var t = root.getAttribute("data-theme");
+      var dark = t === "dark" || (t === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+      icon.textContent = dark ? "☀" : "☾";
+      label.textContent = dark ? "Light" : "Dark";
+      btn.setAttribute("aria-pressed", dark ? "true" : "false");
+    }
+    sync();
+    btn.addEventListener("click", function () {
+      var t = root.getAttribute("data-theme");
+      var dark = t === "dark" || (t === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+      var next = dark ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("wcdw-theme", next); } catch (e) {}
+      sync();
+    });
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", sync);
+  })();
+
+  /* ---------- Kick off ---------- */
+  if (window.WCDW_GUIDE) {
+    boot(window.WCDW_GUIDE);
+  } else if (window.fetch) {
+    fetch("manifest.json").then(function (r) { return r.json(); }).then(boot).catch(fatal);
+  } else {
+    fatal();
+  }
+})();
+</script>
+</body>
+</html>

@@ -25,12 +25,12 @@
   },
   "assets": [
     {
-      "path": "assets/logos/white-cane-day-walk-logo.png",
-      "filename": "white-cane-day-walk-logo.png",
+      "path": "assets/logos/white-cane-day-walk-logo-bank.png",
+      "filename": "white-cane-day-walk-logo-bank.png",
       "category": "logos",
       "type": "image",
       "dimensions": "2000x1414",
-      "thumbnail": "guide/thumbnails/assets/logos/white-cane-day-walk-logo.jpg",
+      "thumbnail": "guide/thumbnails/assets/logos/white-cane-day-walk-logo-bank.jpg",
       "description": "The official 'Walk for Independence — White Cane Day Walk' event logo on a transparent background. Use it at 100% opacity, unmodified, with clear space around it.",
       "tags": [
         "logo",

@@ -1290,11 +1290,16 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
       var paras = fill(e.body).split("\n\n").map(function (p) {
         return '<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#0e1830">' + esc(p) + '</p>';
       }).join("");
-      return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(fill(e.subject)) + '</title></head>' +
-        '<body style="margin:0;padding:0;background:#eef2f8;font-family:Montserrat,Arial,Helvetica,sans-serif">' +
+      /* Load Montserrat inside the email document itself: the preview renders in a
+         srcdoc iframe, which never sees this page's fonts, so without this the live
+         preview falls back to Arial. */
+      return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(fill(e.subject)) + '</title>' +
+        '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media=\'all\'">' +
+        '<style>body,table,td,a{font-family:\'Montserrat\',Helvetica,Arial,sans-serif}</style></head>' +
+        '<body style="margin:0;padding:0;background:#eef2f8;font-family:\'Montserrat\',Helvetica,Arial,sans-serif">' +
         '<div style="max-width:600px;margin:0 auto;padding:24px 16px">' +
         '<div style="height:6px;background:#003087;border-radius:3px 3px 0 0;overflow:hidden"><div style="width:22%;height:6px;background:#78BE21"></div></div>' +
-        '<div style="background:#002855;color:#ffffff;padding:28px 28px 24px">' +
+        '<div style="background:#001852;color:#ffffff;padding:28px 28px 24px">' +
         '<img src="' + LOGO_URL + '" alt="Walk for Independence — White Cane Day Walk logo" width="140" style="float:right;width:140px;height:auto;background:#ffffff;padding:10px;border-radius:10px;margin:0 0 12px 16px">' +
         '<div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#78BE21;margin-bottom:8px">White Cane Day Walk</div>' +
         '<div style="font-size:26px;font-weight:800;line-height:1.15">' + esc(fill(e.subject)) + '</div>' +
@@ -1329,7 +1334,9 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         return lines;
       }
       function render() {
-        x.fillStyle = "#002855"; x.fillRect(0, 0, 1200, 360);
+        /* #001852 is the campaign's deep navy — whitecanedaywalk.com and the approved
+           email banners sit on it (the lighter #002855 read as off-shade). */
+        x.fillStyle = "#001852"; x.fillRect(0, 0, 1200, 360);
         x.fillStyle = "#78BE21"; x.fillRect(0, 0, 264, 8);
         x.fillStyle = "#003087"; x.fillRect(264, 0, 936, 8);
         x.textBaseline = "alphabetic";
@@ -1368,7 +1375,12 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
         }, "image/png");
         toast("Header downloaded — link the image to whitecanedaywalk.com in your email");
       }
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(render); else render();
+      /* Explicitly load the weights the canvas paints with — fonts.ready alone doesn't
+         fetch a face the page hasn't used yet, and the canvas would fall back to Arial. */
+      if (document.fonts && document.fonts.load) {
+        Promise.all(["600","700","800"].map(function (w) { return document.fonts.load(w + " 40px Montserrat"); }))
+          .then(render, render);
+      } else render();
     });
     document.getElementById("ebCopyHtml").addEventListener("click", function () {
       copyText(emailHtml(), "HTML copied — paste into your email tool's HTML editor");
